@@ -1,0 +1,1044 @@
+[
+    {
+        "branch": {
+            "description": "Vehicle",
+            "fullyQualifiedName": "Vehicle"
+        }
+    },
+    {
+        "branch": {
+            "description": "Chassis",
+            "fullyQualifiedName": "Vehicle.Chassis"
+        }
+    },
+    {
+        "branch": {
+            "description": "CurrentLocation",
+            "fullyQualifiedName": "Vehicle.CurrentLocation"
+        }
+    },
+    {
+        "branch": {
+            "description": "Powertrain",
+            "fullyQualifiedName": "Vehicle.Powertrain"
+        }
+    },
+    {
+        "branch": {
+            "description": "Axle",
+            "fullyQualifiedName": "Vehicle.Chassis.Axle"
+        }
+    },
+    {
+        "branch": {
+            "description": "Battery",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery"
+        }
+    },
+    {
+        "branch": {
+            "description": "Charging",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Charging"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module"
+        }
+    },
+    {
+        "branch": {
+            "description": "StateOfCharge",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.StateOfCharge"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 1",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.1"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 10",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.10"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 11",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.11"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 12",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.12"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 13",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.13"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 14",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.14"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 15",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.15"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 16",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.16"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 17",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.17"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 18",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.18"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 19",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.19"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 2",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.2"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 20",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.20"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 21",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.21"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 22",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.22"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 23",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.23"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 24",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.24"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 25",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.25"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 26",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.26"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 27",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.27"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 28",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.28"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 29",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.29"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 3",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.3"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 30",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.30"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 31",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.31"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 32",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.32"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 4",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.4"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 5",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.5"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 6",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.6"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 7",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.7"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 8",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.8"
+        }
+    },
+    {
+        "branch": {
+            "description": "Module 9",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.9"
+        }
+    },
+    {
+        "attribute": {
+            "dataType": "STRING",
+            "fullyQualifiedName": "make",
+            "unit": ""
+        }
+    },
+    {
+        "attribute": {
+            "dataType": "STRING",
+            "fullyQualifiedName": "model",
+            "unit": ""
+        }
+    },
+    {
+        "attribute": {
+            "dataType": "STRING",
+            "fullyQualifiedName": "vin",
+            "unit": ""
+        }
+    },
+    {
+        "attribute": {
+            "dataType": "STRING",
+            "fullyQualifiedName": "year",
+            "unit": ""
+        }
+    },
+    {
+        "attribute": {
+            "dataType": "STRING",
+            "fullyQualifiedName": "license",
+            "unit": ""
+        }
+    },    
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.InCabinTemperature",
+            "max": 50.0,
+            "min": -50.0,
+            "unit": "deg C"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.OutsideAirTemperature",
+            "max": 100.0,
+            "min": -50.0,
+            "unit": "deg C"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Speed",
+            "max": 200.0,
+            "min": 0.0,
+            "unit": "kmh"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.TotalOperatingTime",
+            "unit": "hours"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.LeftFrontTirePressure",
+            "max": 1020.0,
+            "min": 0.0,
+            "unit": "kPaG"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.LeftFrontTireTemperature",
+            "max": 65.0,
+            "min": -40.0,
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.LeftRearTirePressure",
+            "max": 1020.0,
+            "min": 0.0,
+            "unit": "kPaG"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.LeftRearTireTemperature",
+            "max": 65.0,
+            "min": -40.0,
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.RightFrontTirePressure",
+            "max": 1020.0,
+            "min": 0.0,
+            "unit": "kPaG"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.RightFrontTireTemperature",
+            "max": 65.0,
+            "min": -40.0,
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.RightRearTirePressure",
+            "max": 1020.0,
+            "min": 0.0,
+            "unit": "kPaG"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.RightRearTireTemperature",
+            "max": 65.0,
+            "min": -40.0,
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.CurrentLocation.Latitude",
+            "max": 90.0,
+            "min": -90.0,
+            "unit": "degrees"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.CurrentLocation.Longitude",
+            "max": 180.0,
+            "min": -180.0,
+            "unit": "degrees"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BatteryAvailableChargePower",
+            "max": 270.0,
+            "min": 0.0,
+            "unit": "kW"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BatteryAvailableDischargePower",
+            "max": 280.0,
+            "min": 0.0,
+            "unit": "kW"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BatteryCurrent",
+            "max": 230.0,
+            "min": -230.0,
+            "unit": "A"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BatteryDCVoltage",
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "BOOLEAN",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.FanRunning"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.StateOfHealth",
+            "max": 100.0,
+            "min": 0.0,
+            "unit": "%"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "BOOLEAN",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.hasActiveDTC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "BOOLEAN",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Charging.IsCharging"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MaxCellVoltage",
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MaxCellVoltageCellNumber"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MaxTemperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MinCellVoltage",
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MinCellVoltageCellNumber"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MinTemperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.1.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.1.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.10.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.10.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.11.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.11.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.12.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.12.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.13.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.13.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.14.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.14.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.15.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.15.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.16.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.16.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.17.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.17.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.18.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.18.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.19.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.19.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.2.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.2.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.20.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.20.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.21.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.21.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.22.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.22.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.23.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.23.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.24.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.24.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.25.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.25.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.26.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.26.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.27.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.27.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.28.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.28.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.29.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.29.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.3.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.3.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.30.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.30.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.31.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.31.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.32.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.32.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.4.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.4.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.5.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.5.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.6.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.6.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.7.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.7.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.8.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.8.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.9.Temperature",
+            "unit": "degC"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.9.Voltage",
+            "max": 5.0,
+            "min": 0.0,
+            "unit": "V"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.StateOfCharge.Current",
+            "max": 100.0,
+            "min": 0.0,
+            "unit": "%"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.StateOfCharge.Displayed",
+            "max": 100.0,
+            "min": 0.0,
+            "unit": "%"
+        }
+    },
+    {
+        "sensor": {
+            "dataType": "DOUBLE",
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BMSFirmwareVersion"
+        }
+    }
+]

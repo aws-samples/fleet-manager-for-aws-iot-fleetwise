@@ -1,0 +1,304 @@
+VERSION ""
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+
+BS_:
+
+BU_: 
+VAL_TABLE_ PositionValid 0 "Invalid" 1 "Valid" ;
+VAL_TABLE_ TimeValid 0 "Invalid" 1 "Valid" ;
+VAL_TABLE_ TimeConfirmed 0 "Unconfirmed" 1 "Confirmed" ;
+VAL_TABLE_ AttitudeValid 0 "Invalid" 1 "Valid" ;
+VAL_TABLE_ DistanceValid 0 "Invalid" 1 "Valid" ;
+VAL_TABLE_ FixType 0 "No fix" 1 "Dead reckoning only" 2 "2D-fix" 3 "3D-fix" 4 "GNSS + dead reckoning combined" 5 "Time only fix" ;
+VAL_TABLE_ AltitudeValid 0 "Invalid" 1 "Valid" ;
+VAL_TABLE_ FenceValid 0 "Invalid" 1 "Valid" ;
+VAL_TABLE_ FenceCombined 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_TABLE_ Fence1 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_TABLE_ Fence2 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_TABLE_ Fence3 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_TABLE_ Fence4 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_TABLE_ SpeedValid 0 "Invalid" 1 "Valid" ;
+VAL_TABLE_ ImuValid 0 "Invalid" 1 "Valid" ;
+
+
+BO_ 3 gnss_pos: 8 Vector__XXX
+ SG_ PositionAccuracy : 58|6@1+ (1,0) [0|63] "m" Vector__XXX
+ SG_ Latitude : 1|28@1+ (1e-06,-90) [-90|90] "deg" Vector__XXX
+ SG_ Longitude : 29|29@1+ (1e-06,-180) [-180|180] "deg" Vector__XXX
+ SG_ PositionValid : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 2 gnss_time: 6 Vector__XXX
+ SG_ TimeValid : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ TimeConfirmed : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Epoch : 8|40@1+ (0.001,1.57784e+09) [1577840400|2677352027] "sec" Vector__XXX
+
+BO_ 5 gnss_attitude: 8 Vector__XXX
+ SG_ AttitudeValid : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Roll : 1|12@1+ (0.1,-180) [-180|180] "deg" Vector__XXX
+ SG_ Pitch : 22|12@1+ (0.1,-90) [-90|90] "deg" Vector__XXX
+ SG_ Heading : 43|12@1+ (0.1,0) [0|360] "deg" Vector__XXX
+ SG_ RollAccuracy : 13|9@1+ (0.1,0) [0|50] "deg" Vector__XXX
+ SG_ PitchAccuracy : 34|9@1+ (0.1,0) [0|50] "deg" Vector__XXX
+ SG_ HeadingAccuracy : 55|9@1+ (0.1,0) [0|50] "deg" Vector__XXX
+
+BO_ 6 gnss_odo: 8 Vector__XXX
+ SG_ DistanceTrip : 1|22@1+ (1,0) [0|4194303] "m" Vector__XXX
+ SG_ DistanceAccuracy : 23|19@1+ (1,0) [0|524287] "m" Vector__XXX
+ SG_ DistanceValid : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DistanceTotal : 42|22@1+ (1,0) [0|4194303] "km" Vector__XXX
+
+BO_ 1 gnss_status: 1 Vector__XXX
+ SG_ FixType : 0|3@1+ (1,0) [0|5] "" Vector__XXX
+ SG_ Satellites : 3|5@1+ (1,0) [0|31] "" Vector__XXX
+
+BO_ 4 gnss_altitude: 4 Vector__XXX
+ SG_ AltitudeValid : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Altitude : 1|18@1+ (0.1,-6000) [-6000|20000] "m" Vector__XXX
+ SG_ AltitudeAccuracy : 19|13@1+ (1,0) [0|8000] "m" Vector__XXX
+
+BO_ 8 gnss_geofence: 2 Vector__XXX
+ SG_ FenceValid : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ FenceCombined : 1|2@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Fence1 : 8|2@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Fence2 : 10|2@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Fence3 : 12|2@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Fence4 : 14|2@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 7 gnss_speed: 5 Vector__XXX
+ SG_ Speed : 1|20@1+ (0.001,0) [0|1048.575] "m/s" Vector__XXX
+ SG_ SpeedAccuracy : 21|19@1+ (0.001,0) [0|524.287] "m/s" Vector__XXX
+ SG_ SpeedValid : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 9 gnss_imu: 8 Vector__XXX
+ SG_ AccelerationX : 1|10@1+ (0.125,-64) [-64|63.875] "m/s^2" Vector__XXX
+ SG_ AccelerationY : 11|10@1+ (0.125,-64) [-64|63.875] "m/s^2" Vector__XXX
+ SG_ AccelerationZ : 21|10@1+ (0.125,-64) [-64|63.875] "m/s^2" Vector__XXX
+ SG_ AngularRateX : 31|11@1+ (0.25,-256) [-256|255.75] "deg/s" Vector__XXX
+ SG_ AngularRateY : 42|11@1+ (0.25,-256) [-256|255.75] "deg/s" Vector__XXX
+ SG_ AngularRateZ : 53|11@1+ (0.25,-256) [-256|255.75] "deg/s" Vector__XXX
+ SG_ ImuValid : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 256 BatteryBroadcast_SoC_Deteriora: 8 Vector__XXX
+ SG_ StateOfChargeDisplay : 7|8@0+ (0.5,3) [0|0] "%" Vector__XXX
+ SG_ BatteryHeaterTemperature1 : 15|8@0- (1,0) [0|0] "degC" Vector__XXX
+ SG_ MinDeterioration : 23|16@0+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ MinDeteriorationCellNo : 39|8@0+ (1,0) [0|98] "" Vector__XXX
+
+BO_ 257 BatteryBroadcast_SoH_Available: 8 Vector__XXX
+ SG_ BatteryAvailableChargePower : 7|16@0+ (0.01,0) [0|270] "kW" Vector__XXX
+ SG_ BatteryAvailableDischargePower : 23|16@0+ (0.01,0) [0|280] "kW" Vector__XXX
+ SG_ StateOfHealth : 39|16@0+ (0.1,0) [0|100] "%" Vector__XXX
+
+BO_ 512 BatteryBroadcast_CellV_Modules: 8 Vector__XXX
+ SG_ CellVoltage01 m258 : 7|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage02 m258 : 15|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage03 m258 : 23|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage04 m258 : 31|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage05 m258 : 39|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage06 m258 : 47|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage07 m258 : 55|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage08 m258 : 63|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+
+BO_ 513 BatteryBroadcast_CellV_Modul01: 8 Vector__XXX
+ SG_ CellVoltage09 : 7|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage10 m258 : 15|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage11 m258 : 23|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage12 m258 : 31|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage13 m258 : 39|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage14 m258 : 47|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage15 m258 : 55|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage16 m258 : 63|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+
+BO_ 514 BatteryBroadcast_CellV_Modul02: 8 Vector__XXX
+ SG_ CellVoltage17 : 7|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage18 m258 : 15|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage19 m258 : 23|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage20 : 31|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage21 : 39|8@0+ (0.02,0) [2.4|4.8] "V" Vector__XXX
+ SG_ CellVoltage22 : 47|8@0+ (0.02,0) [2.4|4.8] "V" Vector__XXX
+ SG_ CellVoltage23 : 55|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage24 : 63|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+
+BO_ 515 BatteryBroadcast_CellV_Modul03: 8 Vector__XXX
+ SG_ CellVoltage25 : 7|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage26 : 15|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage27 : 23|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage28 : 31|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage29 : 39|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage30 : 47|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage31 : 55|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ CellVoltage32 : 63|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+
+BO_ 768 BatteryBroadcast_Battery_Info_: 8 Vector__XXX
+ SG_ MinCellVoltage m257 : 7|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ MaxCellVoltage m257 : 15|8@0+ (0.02,0) [2.8|4.2] "V" Vector__XXX
+ SG_ BatteryTemperature1 m257 : 23|8@0- (1,0) [0|0] "degC" Vector__XXX
+ SG_ BatteryTemperature2 m257 : 31|8@0- (1,0) [0|0] "degC" Vector__XXX
+ SG_ BatteryTemperature3 m257 : 39|8@0- (1,0) [0|0] "degC" Vector__XXX
+ SG_ BatteryTemperature4 m257 : 47|8@0- (1,0) [0|0] "degC" Vector__XXX
+ SG_ StateOfChargeBMS m257 : 55|8@0+ (0.5,3) [0|100] "%" Vector__XXX
+ SG_ hasActiveDTC : 63|1@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 769 BatteryBroadcast_Battery_Inf01: 8 Vector__XXX
+ SG_ BatteryMinTemperature m257 : 7|8@0- (1,0) [0|0] "degC" Vector__XXX
+ SG_ BatteryMaxTemperature m257 : 15|8@0- (1,0) [0|0] "degC" Vector__XXX
+ SG_ BatteryVoltageAuxillary m257 : 23|8@0+ (0.1,0) [11|14.6] "V" Vector__XXX
+ SG_ BatteryTemperature5 : 31|8@0- (1,0) [0|0.5] "degC" Vector__XXX
+ SG_ BatteryFanFeedback m257 : 39|8@0+ (1,0) [0|120] "Hz" Vector__XXX
+ SG_ BatteryFanStatus m257 : 47|8@0+ (1,0) [0|9] "" Vector__XXX
+ SG_ NormalChargePort m257 : 53|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ RapidChargePort m257 : 54|1@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 770 BatteryBroadcast_Battery_Inf02: 8 Vector__XXX
+ SG_ OperatingTime m257 : 7|32@0+ (0.000277778,0) [0|1000000] "hours" Vector__XXX
+ SG_ MinCellVoltageCellNo m257 : 39|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ MaxCellVoltageCellNo m257 : 47|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Charging m257 : 55|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ BMSMainRelay m257 : 48|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ BMSIgnition m257 : 50|1@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 771 BatteryBroadcast_Battery_Inf03: 8 Vector__XXX
+ SG_ BatteryDCVoltage m257 : 7|16@0+ (0.1,0) [0|0] "V" Vector__XXX
+ SG_ BatteryCurrent m257 : 23|16@0- (0.1,0) [-230|230] "A" Vector__XXX
+
+BO_ 772 BatteryBroadcast_BMSFirmware: 8 Vector__XXX
+ SG_ BMSFirmwareVersion : 0|64@1+ (0.01,0) [0|0] "" Vector__XXX
+
+BO_ 1024 VehicleBroadcast_Temperature_I: 8 Vector__XXX
+ SG_ IndoorTemperature m256 : 7|8@0+ (0.5,-40) [-50|50] "degC" Vector__XXX
+ SG_ OutdoorTemperature m256 : 15|8@0+ (0.5,-40) [-50|50] "degC" Vector__XXX
+ SG_ VehicleSpeed m256 : 23|8@0+ (1,0) [0|200] "kmh" Vector__XXX
+
+BO_ 1025 VehicleBroadCast_Tire_Info: 8 Vector__XXX
+ SG_ TirePressureFrontLeft m49163 : 7|8@0+ (0.2,0) [0|120] "psi" Vector__XXX
+ SG_ TirePressureFrontRight m49163 : 15|8@0+ (0.2,0) [0|120] "psi" Vector__XXX
+ SG_ TirePressureBackLeft m49163 : 23|8@0+ (0.2,0) [0|120] "psi" Vector__XXX
+ SG_ TirePressureBackRight m49163 : 31|8@0+ (0.2,0) [0|120] "psi" Vector__XXX
+ SG_ TireTemperatureFrontLeft m49163 : 39|8@0+ (1,-50) [-40|65] "degC" Vector__XXX
+ SG_ TireTemperatureFrontRight m49163 : 47|8@0+ (1,-50) [-40|65] "degC" Vector__XXX
+ SG_ TireTemperatureBackLeft m49163 : 55|8@0+ (1,-50) [-40|65] "degC" Vector__XXX
+ SG_ TireTemperatureBackRight m49163 : 63|8@0+ (1,-50) [-40|65] "degC" Vector__XXX
+
+BO_ 1280 BatteryBroadcast_CellTemp_Modu: 8 Vector__XXX
+ SG_ CellTemp01 : 7|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp02 : 15|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp03 : 23|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp04 : 31|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp05 : 39|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp06 : 47|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp07 : 55|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp08 : 63|8@0- (1,0) [-128|127] "degC" Vector__XXX
+
+BO_ 1281 BatteryBroadcast_CellTemp_Mo01: 8 Vector__XXX
+ SG_ CellTemp09 : 7|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp10 : 15|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp11 : 23|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp12 : 31|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp13 : 39|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp14 : 47|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp15 : 55|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp16 : 63|8@0- (1,0) [-128|127] "degC" Vector__XXX
+
+BO_ 1282 BatteryBroadcast_CellTemp_Mo02: 8 Vector__XXX
+ SG_ CellTemp17 : 7|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp18 : 15|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp19 : 23|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp20 : 31|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp21 : 39|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp22 : 47|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp23 : 55|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp24 : 63|8@0- (1,0) [-128|127] "degC" Vector__XXX
+
+BO_ 1283 BatteryBroadcast_CellTemp_Mo03: 8 Vector__XXX
+ SG_ CellTemp25 : 7|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp26 : 15|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp27 : 23|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp28 : 31|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp29 : 39|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp30 : 47|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp31 : 55|8@0- (1,0) [-128|127] "degC" Vector__XXX
+ SG_ CellTemp32 : 63|8@0- (1,0) [-128|127] "degC" Vector__XXX
+
+
+BA_DEF_ SG_  "SignalType" STRING ;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 10000;
+BA_DEF_DEF_  "SignalType" "";
+
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_ "GenMsgCycleTime" BO_ 3 250;
+BA_ "GenMsgCycleTime" BO_ 256 500;
+BA_ "GenMsgCycleTime" BO_ 257 500;
+BA_ "GenMsgCycleTime" BO_ 512 500;
+BA_ "GenMsgCycleTime" BO_ 513 500;
+BA_ "GenMsgCycleTime" BO_ 514 500;
+BA_ "GenMsgCycleTime" BO_ 515 500;
+BA_ "GenMsgCycleTime" BO_ 768 500;
+BA_ "GenMsgCycleTime" BO_ 769 500;
+BA_ "GenMsgCycleTime" BO_ 770 500;
+BA_ "GenMsgCycleTime" BO_ 771 500;
+BA_ "GenMsgCycleTime" BO_ 1024 500;
+BA_ "GenMsgCycleTime" BO_ 1025 500;
+BA_ "GenMsgCycleTime" BO_ 1280 500;
+BA_ "GenMsgCycleTime" BO_ 1281 500;
+BA_ "GenMsgCycleTime" BO_ 1282 500;
+BA_ "GenMsgCycleTime" BO_ 1283 500;
+
+BA_ "SignalType" SG_ 3 PositionValid "ENM";
+BA_ "SignalType" SG_ 2 TimeValid "ENM";
+BA_ "SignalType" SG_ 2 TimeConfirmed "ENM";
+BA_ "SignalType" SG_ 5 AttitudeValid "ENM";
+BA_ "SignalType" SG_ 6 DistanceValid "ENM";
+BA_ "SignalType" SG_ 1 FixType "ENM";
+BA_ "SignalType" SG_ 4 AltitudeValid "ENM";
+BA_ "SignalType" SG_ 8 FenceValid "ENM";
+BA_ "SignalType" SG_ 8 FenceCombined "ENM";
+BA_ "SignalType" SG_ 8 Fence1 "ENM";
+BA_ "SignalType" SG_ 8 Fence2 "ENM";
+BA_ "SignalType" SG_ 8 Fence3 "ENM";
+BA_ "SignalType" SG_ 8 Fence4 "ENM";
+BA_ "SignalType" SG_ 7 SpeedValid "ENM";
+BA_ "SignalType" SG_ 9 ImuValid "ENM";
+VAL_ 3 PositionValid 0 "Invalid" 1 "Valid" ;
+VAL_ 2 TimeValid 0 "Invalid" 1 "Valid" ;
+VAL_ 2 TimeConfirmed 0 "Unconfirmed" 1 "Confirmed" ;
+VAL_ 5 AttitudeValid 0 "Invalid" 1 "Valid" ;
+VAL_ 6 DistanceValid 0 "Invalid" 1 "Valid" ;
+VAL_ 1 FixType 0 "No fix" 1 "Dead reckoning only" 2 "2D-fix" 3 "3D-fix" 4 "GNSS + dead reckoning combined" 5 "Time only fix" ;
+VAL_ 4 AltitudeValid 0 "Invalid" 1 "Valid" ;
+VAL_ 8 FenceValid 0 "Invalid" 1 "Valid" ;
+VAL_ 8 FenceCombined 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_ 8 Fence1 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_ 8 Fence2 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_ 8 Fence3 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_ 8 Fence4 0 "Unknown" 1 "Inside" 2 "Outside" ;
+VAL_ 7 SpeedValid 0 "Invalid" 1 "Valid" ;
+VAL_ 9 ImuValid 0 "Invalid" 1 "Valid" ;
+

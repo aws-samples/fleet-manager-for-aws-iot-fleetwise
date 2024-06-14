@@ -1,0 +1,6 @@
+pytest
+ruff==0.1.3
+pylint
+pre-commit
+pylint[spelling]
+moto
