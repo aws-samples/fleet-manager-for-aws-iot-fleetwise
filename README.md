@@ -20,63 +20,68 @@ The following diagram illustrates a high-level architecture of the system that c
 # How to Deploy 
 ## Backend Deployment
 1. Set up the Virtual Environment:
-*	Create a virtual environment using Python:
+* Create a virtual environment using Python:
 On MacOS and Linux:
-    ```
-        python -m venv .venv
-    ```
+```
+    python -m venv .venv
+```
 On Windows:
-    ```
-        python -m venv .venv
-    ```
-2.	Activate the Virtual Environment:
-    On MacOS and Linux:
-        ```
-        source .venv/bin/activate
-        ```
-    On Windows:
-        ```
-            .venv\Scripts\activate.bat
-        ```
-3.	Install Dependencies:
-    Ensure the virtual environment is activated, then install the required dependencies:
-    ```
-    pip install -r requirements.txt
-    ```
-4.	Create Configuration File:
-    Copy the config.template.yaml file to create a config.yaml file and modify account #:
-    ```
-    cp config.template.yaml config.yaml
-    ```
-5.	Bootstrap CDK Environment (only required for the first time):
-    Run the following command to bootstrap your environment:
-    ```
-    cdk bootstrap 
-    ```
-6.	Synthesize CloudFormation Template:
-    Navigate to your CDK project directory and synthesize the CloudFormation template for the backend stack:
-    ```
-    cdk synth BackendStack
-    ```
-7.	Deploy Backend Stack:
-    Deploy the backend stack:
-    ```
-        cdk deploy BackendStack
-    ```
+```
+    python -m venv .venv
+```
 
+2.	Activate the Virtual Environment:
+On MacOS and Linux:
+```
+source .venv/bin/activate
+```
+On Windows:
+```
+    .venv\Scripts\activate.bat
+```
+
+3.	Install Dependencies:
+Ensure the virtual environment is activated, then install the required dependencies:
+```
+pip install -r requirements.txt
+```
+
+4.	Create Configuration File:
+Copy the config.template.yaml file to create a config.yaml file and modify account #:
+```
+cp config.template.yaml config.yaml
+```
+
+5.	Bootstrap CDK Environment (only required for the first time):
+Run the following command to bootstrap your environment:
+```
+cdk bootstrap 
+```
+
+6.	Synthesize CloudFormation Template:
+Navigate to your CDK project directory and synthesize the CloudFormation template for the backend stack:
+```
+cdk synth BackendStack
+```
+
+7.	Deploy Backend Stack:
+Deploy the backend stack:
+```
+cdk deploy BackendStack
+```
 Useful Commands:
-    List all stacks in the app:
-    ```
-    cdk ls
-    ```
+List all stacks in the app:
+```
+cdk ls
+```
 Compare deployed stack with the current state:
-    ```
-    cdk diff
-    ```
+```
+cdk diff
+```
 Open CDK documentation:
-    ```
-        cdk docs
-    ```    
+```
+cdk docs
+```    
 
 ## Frontend Deployment Instructions
 
