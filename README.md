@@ -20,7 +20,7 @@ The following diagram illustrates a high-level architecture of the system that c
 # How to Deploy 
 ## Backend Deployment
 1. Set up the Virtual Environment:
-○	Create a virtual environment using Python:
+*	Create a virtual environment using Python:
 On MacOS and Linux:
 ```
     python -m venv .venv
@@ -112,105 +112,104 @@ cdk deploy FrontendStack
 # FleetWise Fleet Manager Container Services
 
 Cluster Configuration
-    ○	VPC Configuration:
-        ■	The ECS cluster is created within a Virtual Private Cloud (VPC).
-        ■	The VPC is designed to span across 2 Availability Zones to ensure high availability.
-    ○	Cluster Setup:
-        ■	Cluster Name: The cluster is prefixed with the application name, resulting in a cluster named {prefix}_ecs_cluster_{environment}.
-        ■	Capacity Provider: The cluster includes a capacity provider using burstable instance types for cost efficiency and performance.
-        ■	Instance Type: t3.xlarge (Bursty performance instance)
-        ■	AMI: ami-0bd2f238e75f8092a (Amazon Linux AMI specific to us-east-1 region)
+* VPC Configuration:
+    * The ECS cluster is created within a Virtual Private Cloud (VPC).
+    * The VPC is designed to span across 2 Availability Zones to ensure high availability.
+*	Cluster Setup:
+    * Cluster Name: The cluster is prefixed with the application name, resulting in a cluster named {prefix}_ecs_cluster_{environment}.
+    * Capacity Provider: The cluster includes a capacity provider using burstable instance types for cost efficiency and performance.
+    * Instance Type: t3.xlarge (Bursty performance instance)
+    * AMI: ami-0bd2f238e75f8092a (Amazon Linux AMI specific to us-east-1 region)
 EC2 Task Definition
-    1.	Task Family: The task is defined under the family name {prefix}_vehicle_simulator_task_{enviroment}.
-    2.	Network Mode: The network mode is set to HOST, allowing containers to share the underlying EC2 instance's network interface.
-    3.	IAM Policy:
-        ○	A specific IAM policy is attached to the task role, granting permission to perform s3:GetObject on all S3 resources.
+1.	Task Family: The task is defined under the family name {prefix}_vehicle_simulator_task_{enviroment}.
+2.	Network Mode: The network mode is set to HOST, allowing containers to share the underlying EC2 instance's network interface.
+3.	IAM Policy:
+*	A specific IAM policy is attached to the task role, granting permission to perform s3:GetObject on all S3 resources.
 Containers
-    1.	Fleetwise Edge Container:
-        ○	Container Name: cvs-fleetwise-edge
-        ○	Image: public.ecr.aws/aws-iot-fleetwise-edge/aws-iot-fleetwise-edge:v1.1.1
-        ○	Memory Limit: 512 MiB
-        ○	Memory Reservation: 256 MiB
-        ○	Logging: Configured to use AWS CloudWatch Logs with the prefix fleetwise-edge-agent.
-        ○	Environment Variables:
-            ■	PRIVATE_KEY
-            ■	CAN_BUS0
-            ■	ENDPOINT_URL
-            ■	CERTIFICATE
-            ■	VEHICLE_NAME
-    2.	Simulator Container:
-        ○	Container Name: cvs-fleetwise-simulator
-        ○	Image: Built from a Dockerfile located in ./src/simulator/.
-        ○	Memory Limit: 512 MiB (Configurable via SIMULATOR_MEMORY_LIMIT)
-        ○	Memory Reservation: 256 MiB (Configurable via SIMULATOR_MEMORY_RESERVATION)
-        ○	Logging: Configured to use AWS CloudWatch Logs with the prefix fleetwise-simulator.
-        ○	Environment Variables:
-            ■	VCAN_ADDRESS
-            ■	CONFIG_BUCKET_NAME
-            ■	COORDINATES_S3_KEY
-            ■	COORDINATES_TYPE
-    ○	Linux Parameters: The container is given NET_ADMIN capabilities to manage network settings.
+1.	Fleetwise Edge Container:
+*	Container Name: cvs-fleetwise-edge
+*	Image: public.ecr.aws/aws-iot-fleetwise-edge/aws-iot-fleetwise-edge:v1.1.1
+*	Memory Limit: 512 MiB
+*	Memory Reservation: 256 MiB
+*	Logging: Configured to use AWS CloudWatch Logs with the prefix fleetwise-edge-agent.
+*	Environment Variables:
+    * PRIVATE_KEY
+    * CAN_BUS0
+    * ENDPOINT_URL
+    * CERTIFICATE
+    * VEHICLE_NAME
+2.	Simulator Container:
+*	Container Name: cvs-fleetwise-simulator
+*	Image: Built from a Dockerfile located in ./src/simulator/.
+*	Memory Limit: 512 MiB (Configurable via SIMULATOR_MEMORY_LIMIT)
+*	Memory Reservation: 256 MiB (Configurable via SIMULATOR_MEMORY_RESERVATION)
+*	Logging: Configured to use AWS CloudWatch Logs with the prefix fleetwise-simulator.
+*	Environment Variables:
+    * VCAN_ADDRESS
+    * CONFIG_BUCKET_NAME
+    * COORDINATES_S3_KEY
+    * COORDINATES_TYPE
+*	Linux Parameters: The container is given NET_ADMIN capabilities to manage network settings.
 
 # IoT Core & Fleetwise Components
 
 ## IoT Policy
-    ○	Policy Name: iot-policy
-    ○	Policy Document:
-        ○	Version: 2012-10-17
-        ○	Statements: The policy includes several statements that define permissions for IoT operations:
-            ■	Connect: Allows IoT devices to connect to AWS IoT using the specified ARN pattern.
-            ■	Action: iot:Connect
-            ■	Resource: arn:aws:iot:us-east-1:12345678910:client/${iot:Connection.Thing.ThingName}
-            ■	Publish: Permits IoT devices to publish messages to specific topics.
-            ■	Action: iot:Publish
-            ■	Resources:
-                ■	arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/checkins
-                ■	arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/signals
-            ■	Subscribe: Enables subscription to specific topic filters.
-            ■	Action: iot:Subscribe
-            ■	Resources:
-                ■	arn:aws:iot:us-east-1:12345678910:topicfilter/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/collection_schemes
-                ■	arn:aws:iot:us-east-1:12345678910:topicfilter/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/decoder_manifests
-            ■	Receive: Allows receiving messages on specific topics.
-            ■	Action: iot:Receive
-            ■	Resources:
-            ■	arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/collection_schemes
-            ■	arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/decoder_manifests
-
-    ○	Thing Type
-    	Thing Type Name: ```thing_type```
-    Properties:
-        ○	Searchable Attributes: The thing type includes attributes such as make, model, and year, which can be used for searching IoT devices.
+* Policy Name: iot-policy
+* Policy Document:
+* Version: 2012-10-17
+* Statements: The policy includes several statements that define permissions for IoT operations:
+* Connect: Allows IoT devices to connect to AWS IoT using the specified ARN pattern.
+* Action: iot:Connect
+* Resource: arn:aws:iot:us-east-1:12345678910:client/${iot:Connection.Thing.ThingName}
+* Publish: Permits IoT devices to publish messages to specific topics.
+* Action: iot:Publish
+* Resources:
+    * arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/checkins
+    * arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/signals
+* Subscribe: Enables subscription to specific topic filters.
+* Action: iot:Subscribe
+* Resources:
+* arn:aws:iot:us-east-1:12345678910:topicfilter/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/collection_schemes
+* arn:aws:iot:us-east-1:12345678910:topicfilter/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/decoder_manifests
+* Receive: Allows receiving messages on specific topics.
+* Action: iot:Receive
+* Resources:
+* arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/collection_schemes
+* arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/decoder_manifests
+* Thing Type
+Thing Type Name: ```thing_type```
+Properties:
+*	Searchable Attributes: The thing type includes attributes such as make, model, and year, which can be used for searching IoT devices.
 
 ## Signal Catalog
-    1.	Catalog Name: signal_catalog
-    2.	Description: SignalCatalog
-    3.	Nodes: The signal catalog contains definitions of various signal nodes required for vehicle diagnostics and monitoring. These nodes are defined in a JSON file (signal-catalog-nodes.json).
+* **Catalog Name**: signal_catalog
+* **Description**: SignalCatalog
+* **Nodes**: The signal catalog contains definitions of various signal nodes required for vehicle diagnostics and monitoring. These nodes are defined in a JSON file (signal-catalog-nodes.json).
 ## Model Manifest
-    1.	Model Name: vehicle_model
-    2.	Description: VEHICLE MODEL
-    3.	Nodes: The model manifest includes nodes that are derived from the signal catalog and additional attributes relevant to the vehicle model. The nodes are listed in a JSON file  (decoder-manifest-signals.json) and include attributes such as make, model, vin, year, and license.
-    4.	Status: The status of the model manifest is set to ACTIVE.
+* **Model Name**: vehicle_model
+* **Description**: VEHICLE MODEL
+* **Nodes**: The model manifest includes nodes that are derived from the signal catalog and additional attributes relevant to the vehicle model. The nodes are listed in a JSON file  (decoder-manifest-signals.json) and include attributes such as make, model, vin, year, and license.
+* **Status**: The status of the model manifest is set to ACTIVE.
 ## Decoder Manifest
-    1.	Decoder Manifest Name: decoder_manifest
-    2.	Description: DECODER MANIFEST
-    3.	Model Manifest ARN: The ARN of the associated model manifest is referenced here.
-    4.	Network Interfaces: Defines the network interfaces used for vehicle communication.
-        ○	Interface ID: 1
-        ○	Type: CAN_INTERFACE
-        ○	Details: Uses a CAN interface named vcan0.
-    5.	Signal Decoders: The decoder manifest includes signal decoders defined for CAN and OBD signals, allowing the translation of raw vehicle data into meaningful metrics.
-    6.	Status: The status of the decoder manifest is ACTIVE.
+* **Decoder Manifest Name**: decoder_manifest
+* **Description**: DECODER MANIFEST
+* **Model Manifest ARN**: The ARN of the associated model manifest is referenced here.
+* **Network Interfaces**: Defines the network interfaces used for vehicle communication.
+    *	**Interface ID**: 1
+    *	**Type**: CAN_INTERFACE
+    *	**Details**: Uses a CAN interface named vcan0.
+* **Signal Decoders**: The decoder manifest includes signal decoders defined for CAN and OBD signals, allowing the translation of raw vehicle data into meaningful metrics.
+* **Status**: The status of the decoder manifest is ACTIVE.
 
 ## Key Components and Files
-    JSON Files
-        ●	signal-catalog-nodes.json: Contains the definitions of signal nodes used in the signal catalog.
-        ●	decoder-manifest-signals.json: Lists the decoder signals and attributes used in the model manifest.
-    IoT Operations and Topics
-        ●	Topic for Vehicle Check-ins: arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/checkins
-        ●	Topic for Vehicle Signals: arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/signals
-        ●	Topic Filter for Collection Schemes: arn:aws:iot:us-east-1:12345678910:topicfilter/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/collection_schemes
-        ●	Topic Filter for Decoder Manifests: arn:aws:iot:us-east-1:12345678910:topicfilter/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/decoder_manifests
+JSON Files
+    ●	signal-catalog-nodes.json: Contains the definitions of signal nodes used in the signal catalog.
+    ●	decoder-manifest-signals.json: Lists the decoder signals and attributes used in the model manifest.
+IoT Operations and Topics
+    ●	Topic for Vehicle Check-ins: arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/checkins
+    ●	Topic for Vehicle Signals: arn:aws:iot:us-east-1:12345678910:topic/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/signals
+    ●	Topic Filter for Collection Schemes: arn:aws:iot:us-east-1:12345678910:topicfilter/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/collection_schemes
+    ●	Topic Filter for Decoder Manifests: arn:aws:iot:us-east-1:12345678910:topicfilter/$aws/iotfleetwise/vehicles/${iot:Connection.Thing.ThingName}/decoder_manifests
 
 # Lambdas
 
@@ -278,30 +277,30 @@ Containers
 # Data Repositories
 
 ## DynamoDB Table:
-    ○	Efficiently stores and manages metadata related to fleet management.
-    ○	Supports flexible querying and point-in-time recovery for data protection.
+    *	Efficiently stores and manages metadata related to fleet management.
+    *	Supports flexible querying and point-in-time recovery for data protection.
 ## S3 Buckets:
-    ○	Securely stores files and data related to certificates and locations.
-    ○	Provides scalable storage solutions with easy integration into other AWS services.
+    *	Securely stores files and data related to certificates and locations.
+    *	Provides scalable storage solutions with easy integration into other AWS services.
 ## Timestream Database and Table:
-    ○	Efficiently stores time-series telemetry data with configurable retention policies.
-    ○	Allows for quick retrieval and analysis of recent and historical telemetry data.
+    *	Efficiently stores time-series telemetry data with configurable retention policies.
+    *	Allows for quick retrieval and analysis of recent and historical telemetry data.
 
 ### DynamoDB Table
     ●	Table Name: metadata_table
     ●	Description: This DynamoDB table is used for storing metadata related to fleet management. The table is configured to support flexible querying with a partition key and an optional sort key.
     ●	Partition Key:
-        ○	Name: pk
-        ○	Type: STRING
+        *	Name: pk
+        *	Type: STRING
     ●	Sort Key (Optional):
-        ○	Name: sk
-        ○	Type: STRING
+        *	Name: sk
+        *	Type: STRING
     ●	Billing Mode: PAY_PER_REQUEST
-        ○	DynamoDB automatically scales throughput based on the workload, allowing cost-effective and efficient data management.
+        *	DynamoDB automatically scales throughput based on the workload, allowing cost-effective and efficient data management.
     ●	Point-in-Time Recovery: Enabled
-        ○	Provides continuous backups and the ability to restore the table to any point in time within the last 35 days.
+        *	Provides continuous backups and the ability to restore the table to any point in time within the last 35 days.
     ●	Parameter Store Path: /dynamodb/metadata_table_name
-        ○	The table name is stored in the AWS Systems Manager Parameter Store for easy retrieval and configuration management.
+        *	The table name is stored in the AWS Systems Manager Parameter Store for easy retrieval and configuration management.
 
 ### Simulation Tasks Table Structure
     Partition Key (pk):
@@ -312,14 +311,14 @@ Containers
         ●	Description: Unique identifier for each vehicle simulation task. It typically uses the vehicle's identifier (e.g., vehicle_id).
     Attributes:
         ●	vcan:
-            ○	Type: String
-            ○	Description: Represents the virtual CAN (Controller Area Network) port assigned to the simulation.
+            *	Type: String
+            *	Description: Represents the virtual CAN (Controller Area Network) port assigned to the simulation.
         ●	status:
-            ○	Type: String
-            ○	Description: Current status of the simulation task (e.g., "STARTING").
+            *	Type: String
+            *	Description: Current status of the simulation task (e.g., "STARTING").
         ●	task_arn (Optional, used in updates):
-            ○	Type: String
-            ○	Description: Amazon Resource Name (ARN) of the ECS task associated with the simulation.
+            *	Type: String
+            *	Description: Amazon Resource Name (ARN) of the ECS task associated with the simulation.
 
 ### Trips Table Structure
     Partition Key (pk):
@@ -330,51 +329,51 @@ Containers
         ●	Description: Unique identifier for each trip, generated using uuid.uuid4().
     Attributes:
         ●	vehicle_name:
-            ○	Type: String
-            ○	Description: Name of the vehicle associated with the trip.
+            *	Type: String
+            *	Description: Name of the vehicle associated with the trip.
         ●	date:
-            ○	Type: String (ISO 8601 Date format)
-            ○	Description: Date of the trip (e.g., "2024-06-12").
+            *	Type: String (ISO 8601 Date format)
+            *	Description: Date of the trip (e.g., "2024-06-12").
         ●	start:
-            ○	Type: String
-            ○	Description: Starting address of the trip.
+            *	Type: String
+            *	Description: Starting address of the trip.
         ●	stop:
-            ○	Type: String
-            ○	Description: Ending address of the trip.
+            *	Type: String
+            *	Description: Ending address of the trip.
         ●	duration:
-            ○	Type: Number (Decimal with precision to three decimal places)
-            ○	Description: Duration of the trip in seconds.
+            *	Type: Number (Decimal with precision to three decimal places)
+            *	Description: Duration of the trip in seconds.
         ●	distance:
-            ○	Type: Number (Decimal with precision to three decimal places)
-            ○	Description: Distance covered during the trip.
+            *	Type: Number (Decimal with precision to three decimal places)
+            *	Description: Distance covered during the trip.
 
 ### S3 Buckets
     #### Certificates Bucket
-        ○	Bucket Name: cert_output_bucket
-        ○	Description: This S3 bucket is used for storing certificates related to the fleet management system. It ensures secure and scalable storage for various certificate files.
-        ○	Naming Format: cert-output-bucket
-        ○	Parameter Store Path: /s3/cert_output_bucket_name
-            ■	The bucket name is stored in the AWS Systems Manager Parameter Store for easy retrieval and configuration management.
+        *	Bucket Name: cert_output_bucket
+        *	Description: This S3 bucket is used for storing certificates related to the fleet management system. It ensures secure and scalable storage for various certificate files.
+        *	Naming Format: cert-output-bucket
+        *	Parameter Store Path: /s3/cert_output_bucket_name
+            * The bucket name is stored in the AWS Systems Manager Parameter Store for easy retrieval and configuration management.
     #### Locations Bucket
-        ○	Bucket Name: location_bucket
-        ○	Description: This S3 bucket is used for storing location data related to the fleet. It provides secure and scalable storage for files that contain location information.
-        ○	Naming Format: Spinal case (location-bucket)
-        ○	Parameter Store Path: /s3/location_bucket_name
-            ■	The bucket name is stored in the AWS Systems Manager Parameter Store for easy retrieval and configuration management.
+        *	Bucket Name: location_bucket
+        *	Description: This S3 bucket is used for storing location data related to the fleet. It provides secure and scalable storage for files that contain location information.
+        *	Naming Format: Spinal case (location-bucket)
+        *	Parameter Store Path: /s3/location_bucket_name
+            * The bucket name is stored in the AWS Systems Manager Parameter Store for easy retrieval and configuration management.
     #### Timestream Database and Table
         1.	Timestream Database
-            ○	Database Name: fleetwise_telemetry_database
-            ○	Description: This Timestream database is created to store telemetry data for the fleet management system. It supports efficient querying and storage of time-series data.
-            ○	Parameter Store Path: /timestream/fleetwise_telemetry_database_name
-            ■	The database name is stored in the AWS Systems Manager Parameter Store for easy retrieval and configuration management.
+            *	Database Name: fleetwise_telemetry_database
+            *	Description: This Timestream database is created to store telemetry data for the fleet management system. It supports efficient querying and storage of time-series data.
+            *	Parameter Store Path: /timestream/fleetwise_telemetry_database_name
+            * The database name is stored in the AWS Systems Manager Parameter Store for easy retrieval and configuration management.
         2.	Timestream Table
-            ○	Table Name: fleetwise_telemetry_table
-            ○	Description: This table is created within the Timestream database to store telemetry data collected from the fleet. It is configured to retain data in both memory and magnetic storage with specific retention policies.
-            ○	Retention Properties:
-                ■	Magnetic Store Retention Period: 7 days
-                ■	Data is retained in magnetic storage for 7 days, providing cost-effective long-term storage.
-                ■	Memory Store Retention Period: 24 hours
-                ■	Data is retained in memory for 24 hours, enabling fast querying for recent data.
+            *	Table Name: fleetwise_telemetry_table
+            *	Description: This table is created within the Timestream database to store telemetry data collected from the fleet. It is configured to retain data in both memory and magnetic storage with specific retention policies.
+            *	Retention Properties:
+                * Magnetic Store Retention Period: 7 days
+                * Data is retained in magnetic storage for 7 days, providing cost-effective long-term storage.
+                * Memory Store Retention Period: 24 hours
+                * Data is retained in memory for 24 hours, enabling fast querying for recent data.
 
 
 
