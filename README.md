@@ -33,7 +33,7 @@ On Windows:
 2.	Activate the Virtual Environment:
 On MacOS and Linux:
 ```
-source .venv/bin/activate
+    source .venv/bin/activate
 ```
 On Windows:
 ```
@@ -43,75 +43,75 @@ On Windows:
 3.	Install Dependencies:
 Ensure the virtual environment is activated, then install the required dependencies:
 ```
-pip install -r requirements.txt
+    pip install -r requirements.txt
 ```
 
 4.	Create Configuration File:
 Copy the config.template.yaml file to create a config.yaml file and modify account #:
 ```
-cp config.template.yaml config.yaml
+    cp config.template.yaml config.yaml
 ```
 
 5.	Bootstrap CDK Environment (only required for the first time):
 Run the following command to bootstrap your environment:
 ```
-cdk bootstrap 
+    cdk bootstrap 
 ```
 
 6.	Synthesize CloudFormation Template:
 Navigate to your CDK project directory and synthesize the CloudFormation template for the backend stack:
 ```
-cdk synth BackendStack
+    cdk synth BackendStack
 ```
 
 7.	Deploy Backend Stack:
 Deploy the backend stack:
 ```
-cdk deploy BackendStack
+    cdk deploy BackendStack
 ```
 Useful Commands:
 List all stacks in the app:
 ```
-cdk ls
+    cdk ls
 ```
 Compare deployed stack with the current state:
 ```
-cdk diff
+    cdk diff
 ```
 Open CDK documentation:
 ```
-cdk docs
+    cdk docs
 ```    
 
 ## Frontend Deployment Instructions
 
 1. Navigate to Frontend Directory:
 ```
-cd src/frontend/
+    cd src/frontend/
 ```
 
 2. Install Frontend Dependencies:
 ```
-npm install
+    npm install
 ```
 
 3. Build the Frontend:
 ```
-npm run build
+    npm run build
 ```
 
 4. Navigate Back to CDK Directory:
 ```
-cd ../../
+    cd ../../
 ```
 
 5. Synthesize CloudFormation Template for Frontend:
 ```
-cdk synth FrontendStack
+    cdk synth FrontendStack
 ```
 6. Deploy Frontend Stack:
 ```
-cdk deploy FrontendStack
+    cdk deploy FrontendStack
 ```
 
 # FleetWise Fleet Manager Container Services
