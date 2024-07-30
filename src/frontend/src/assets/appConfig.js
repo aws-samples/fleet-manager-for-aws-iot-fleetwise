@@ -16,16 +16,13 @@ const appVariables = window.appVariables || {};
 
 export const USER_POOL_ID = appVariables.USER_POOL_ID;
 export const USER_POOL_CLIENT_ID = appVariables.USER_POOL_CLIENT_ID;
+export const IDENTITY_POOL_ID = appVariables.IDENTITY_POOL_ID;
 export const CDF_AUTO_ENDPOINT = appVariables.CDF_AUTO_ENDPOINT;
 export const REGION = appVariables.REGION;
-export const MAP_NAME = appVariables.MAP_NAME;
+export const LOCATION_MAP_NAME = appVariables.LOCATION_MAP_NAME;
+export const ROUTE_MAP_NAME = appVariables.ROUTE_MAP_NAME;
 export const CALCULATOR_NAME = appVariables.CALCULATOR_NAME;
 export const PLACE_INDEX_NAME = appVariables.PLACE_INDEX_NAME;
-
-export const MAP_STYLE_API_KEY = appVariables.MAP_STYLE_API_KEY;
-
-export const AWS_ACCESS_KEY_ID = appVariables.AWS_ACCESS_KEY_ID;
-export const AWS_SECRET_ACCESS_KEY = appVariables.AWS_SECRET_ACCESS_KEY;
 
 
 export const SINGLE_FEATURE_ZOOM_LEVEL = 16;

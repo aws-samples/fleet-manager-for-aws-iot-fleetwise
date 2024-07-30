@@ -20,12 +20,22 @@ class FrontendStack(BaseStack):
         super().__init__(scope, id, **kwargs)
         
         # Create map resource
-        self.map = location.CfnMap(
+        self.route_map = location.CfnMap(
             self,
-            self.name_helper("Map"),
-            map_name=self.name_helper("map"),
+            self.name_helper("route_map"),
+            map_name=self.name_helper("route_map"),
             configuration=location.CfnMap.MapConfigurationProperty(
-                style="VectorEsriStreets"  
+                style=self.config["ROUTE_MAP_STYLE"] 
+            )
+        )
+        
+        # Create map resource
+        self.location_map = location.CfnMap(
+            self,
+            self.name_helper("location_map"),
+            map_name=self.name_helper("location_map"),
+            configuration=location.CfnMap.MapConfigurationProperty(
+                style=self.config["LOCATION_MAP_STYLE"] 
             )
         )
 
@@ -60,7 +70,7 @@ class FrontendStack(BaseStack):
         self.origin_access_identity = cloudfront.OriginAccessIdentity(
             self,
             self.name_helper("origin_access_identity"),
-            comment="CMS UI S3 Backend OAI",
+            comment="Fleet Manager UI S3 Backend OAI",
         )
 
         self.static_ui_bucket.grant_read(self.origin_access_identity)
@@ -88,7 +98,7 @@ class FrontendStack(BaseStack):
             ],
             viewer_certificate=cloudfront.ViewerCertificate.from_cloud_front_default_certificate(),
             viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-            comment="CMS Cloudfront Distribution. Env: "
+            comment="Fleet Manager Cloudfront Distribution. Env: "
             + self.config["ENVIRONMENT_NAME"],
             error_configurations=[error_response_1, error_response_2],
         )
@@ -158,6 +168,7 @@ class FrontendStack(BaseStack):
             Exception: For general failures, especially in fetching parameters.
         """
         try:
+            user_pool_id = '';
             # Fetch parameter values from SSM Parameter Store
             user_pool_id = ssm.StringParameter.value_from_lookup(
                 self, self.get_parameter_name("user_pool_id", "/cognito/")
@@ -165,9 +176,12 @@ class FrontendStack(BaseStack):
             user_pool_client_id = ssm.StringParameter.value_from_lookup(
                 self, self.get_parameter_name("user_pool_client_id", "/cognito/")
             )
+            identity_pool_id=''
             identity_pool_id = ssm.StringParameter.value_from_lookup(
                 self, self.get_parameter_name("identity_pool_id", "/cognito/")
             )
+
+            print(identity_pool_id)
             api_url = ssm.StringParameter.value_from_lookup(
                 self, self.get_parameter_name("backend_api_url", "/api/")
             )
@@ -180,7 +194,8 @@ class FrontendStack(BaseStack):
                 f"USER_POOL_CLIENT_ID:'{user_pool_client_id}',"
                 f"IDENTITY_POOL_ID:'{identity_pool_id}',"
                 f"CDF_AUTO_ENDPOINT:'{api_url.strip('/')}',"
-                f"MAP_NAME:'{self.map.map_name}',"
+                f"LOCATION_MAP_NAME:'{self.location_map.map_name}',"
+                f"ROUTE_MAP_NAME:'{self.route_map.map_name}',"
                 f"CALCULATOR_NAME:'{self.route_calculator.calculator_name}',"
                 f"PLACE_INDEX_NAME:'{self.place_index.index_name}'"
                 "};"

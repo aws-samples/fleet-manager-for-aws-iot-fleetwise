@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { LocationClient,SearchPlaceIndexForTextCommand, CalculateRouteCommand } from "@aws-sdk/client-location";
 import { grayVehicleBg, mediumBlue, darkNavyText, lightGrayishBlue, white, mistySteel, slateBlue } from "assets/colors";
 import { startorStopSimulation } from "apis/simulation";
 import Loading from "components/dashboard/tables/custom/Loader";
-import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, REGION, PLACE_INDEX_NAME, CALCULATOR_NAME } from 'assets/appConfig';
-import Location from 'aws-sdk/clients/location';
-
+import { REGION, PLACE_INDEX_NAME, CALCULATOR_NAME, IDENTITY_POOL_ID } from 'assets/appConfig';
+import { withIdentityPoolId } from '@aws/amazon-location-utilities-auth-helper';
 
 
 const SingleVehicleSimulation = ({ handleClose, vehicleName, handleToast, simulationStarted }) => {
     const classes = useStyles();
-
+   const [locationService, setLocationService] = useState(null)
     const [startLocation, setStartLocation] = useState("Los Angeles Airport Marriott, 5855 W Century Blvd, Los Angeles, CA 90045, United States");
     const [endLocation, setEndLocation] = useState("STILE Downtown Los Angeles by Kasa, 929 S Broadway, Los Angeles, CA 90015, United States");
     const [formErrors, setFormErrors] = useState({});
@@ -19,22 +19,34 @@ const SingleVehicleSimulation = ({ handleClose, vehicleName, handleToast, simula
     let fromCoordinates = {}
     let toCoordinates = {}
 
+    const initializeLocationService = async () => {
+        
+        const authHelper = await withIdentityPoolId(REGION + ':' + IDENTITY_POOL_ID); // use Cognito pool id for credentials
+
+        const locationService = new LocationClient({
+            region: REGION,
+            ...authHelper.getLocationClientConfig()
+        });
+
+        setLocationService(locationService);
+    }
+
+    useEffect(()=>{
+        initializeLocationService()
+    },[])
+
     const handleGeocode = async (address, type) => {
         let errObj = {};
-        const client = new Location({
-            credentials: {
-                accessKeyId: AWS_ACCESS_KEY_ID,
-                secretAccessKey: AWS_SECRET_ACCESS_KEY
-            },
-            region: REGION // Your AWS region
-        });
+
         const params = {
             IndexName: PLACE_INDEX_NAME, // Replace with your Place Index name
             Text: address
         };
 
         try {
-            const response = await client.searchPlaceIndexForText(params).promise();
+            const command = new SearchPlaceIndexForTextCommand({ Text: address, IndexName: PLACE_INDEX_NAME });
+            const response = await locationService.send(command);
+            //const response = await locationService.searchPlaceIndexForText(params).promise();
             if (response.Results && response.Results.length > 0) {
                 const [Longitude, Latitude] = response.Results[0].Place.Geometry.Point;
                 
@@ -101,14 +113,6 @@ const SingleVehicleSimulation = ({ handleClose, vehicleName, handleToast, simula
 
         if (Object.keys(formErrors).length === 0) {
             try {
-                const locationService = new Location({
-                    credentials: {
-                        accessKeyId: AWS_ACCESS_KEY_ID,
-                        secretAccessKey: AWS_SECRET_ACCESS_KEY
-                    },
-                    region: REGION
-                });
-
                 const params = {
                     CalculatorName: CALCULATOR_NAME,
                     DeparturePosition: [fromCoordinates.Longitude, fromCoordinates.Latitude], // Longitude first, Latitude second
@@ -116,7 +120,8 @@ const SingleVehicleSimulation = ({ handleClose, vehicleName, handleToast, simula
                     IncludeLegGeometry: true
                 };
 
-                const routeResponse = await locationService.calculateRoute(params).promise();
+                const command = new CalculateRouteCommand(params);
+                const routeResponse = await locationService.send(command);
                 let { Geometry } = routeResponse.Legs[0];
 
                 const payload = {
@@ -128,8 +133,8 @@ const SingleVehicleSimulation = ({ handleClose, vehicleName, handleToast, simula
                     "endAddress": endLocation,
                     "locationData": routeResponse
                 }
-                const response = await startorStopSimulation(payload)
-
+                let response = await startorStopSimulation(payload)
+                
                 if(response.body) {
                     let error = response.body
                     error = error.toString()

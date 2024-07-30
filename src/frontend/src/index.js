@@ -14,19 +14,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import Amplify from "aws-amplify";
 import AppWithAuth from "./AppWithAuth";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/styles";
 import ErrorBoundary from "components/global/ErrorBoundary";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 import awsConfig from "./awsConfig";
 import store from "store";
 import "assets/css/index.css";
+import { Authenticator, View } from '@aws-amplify/ui-react';
+import { Amplify } from 'aws-amplify';
 
 Amplify.configure(awsConfig);
 
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: {
     fontFamily: ["-apple-system", "BlinkMacSystemFont", "AmazonEmber"].join(",")
   }
@@ -38,7 +39,9 @@ ReactDOM.render(
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          <Authenticator.Provider>
           <AppWithAuth />
+          </Authenticator.Provider>
         </ThemeProvider>
       </BrowserRouter>
     </Provider>

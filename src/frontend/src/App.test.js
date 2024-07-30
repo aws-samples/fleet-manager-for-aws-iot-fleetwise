@@ -18,7 +18,7 @@ import Amplify from "aws-amplify";
 import AppWithAuth from "./AppWithAuth";
 import store from "store";
 
-Amplify.configure();
+//Amplify.configure();
 
 it("renders without crashing", () => {
   const div = document.createElement("div");

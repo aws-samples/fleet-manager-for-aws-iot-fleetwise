@@ -10,70 +10,123 @@
  *  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions    *
  *  and limitations under the License.                                                                                *
  *********************************************************************************************************************/
-import { API } from "aws-amplify";
+import { ApiError, get, post } from "aws-amplify/api";
 import { CDF_AUTO } from "apis/_NAMES";
-import { VEHICLE_TRIPS_DATA } from "data/testData";
-
+import { CDF_AUTO_ENDPOINT } from "assets/appConfig";
 
 export const getVehicleTrips = (vehicleName) => {
-  return API.get(CDF_AUTO, `/vehicle/trips`, {
-    queryStringParameters: {
+  return get({
+    apiName: CDF_AUTO, 
+    endpoint: CDF_AUTO_ENDPOINT, 
+    path: `/vehicle/trips`,
+    options: {
+      queryParams: {
       "vehicle-name": vehicleName
-    },
+    }}
   });
-  return VEHICLE_TRIPS_DATA
-  // return API.get(CDF_AUTO, `/vehicles/${vin}/trips`, {
-  //   queryStringParameters: {
-  //     filters: JSON.stringify({
-  //       filters: {
-  //         dates: { start: "", end: "" },
-  //       },
-  //       pagination: { offset, maxResults: 40 },
-  //     }),
-  //   },
-  // });
 };
-
 
 //Add new vehicle
 export const addNewVehicle = async (data) => {
-  return API.post(CDF_AUTO, `/vehicle`, {
-    body: data,
+  return post({
+    apiName: CDF_AUTO, 
+    endpoint: CDF_AUTO_ENDPOINT, 
+    path: `/vehicle`,
+    options: {
+      body: data
+    }
   });
 };
 
-
-export const getVehiclesByFleetName = (fleet) =>
-  API.get(CDF_AUTO, `/fleet/list-vehicles`, {
-    queryStringParameters: {
-      "fleet-name": fleet
-    },
+export async function getVehiclesByFleetName(fleet) {
+  try {
+    const restOperation = get(
+      {
+          apiName: CDF_AUTO, 
+          endpoint: CDF_AUTO_ENDPOINT, 
+      path: `/fleet/list-vehicles`,
+      options: {
+        queryParams: {
+        "fleet-name": fleet
+        }}
   });
+  return (await restOperation.response).body.json();
+} catch (error) {
+    if (error instanceof ApiError) {
+      if (error.response) {
+        const { 
+          statusCode, 
+          headers, 
+          body 
+        } = error.response;
+        console.error(`Received ${statusCode} error response with payload: ${body}`);
+      }
+  }
+}
+}
 
-export const getTelemetryDetailsByFleetName = (fleet) =>
-  API.get(CDF_AUTO, `/telemetry`, {
-    queryStringParameters: {
-      "fleet-name": fleet
-    },
-  });
+export async function getTelemetryDetailsByFleetName (fleet) {
+  const restOperation = get({
+    apiName: CDF_AUTO, 
+    endpoint: CDF_AUTO_ENDPOINT, 
+    path: `/telemetry`, 
+    options: {
+        queryParams: {
+        "fleet-name": fleet
+    }}
+  })
+  return (await restOperation.response).body.json();
+};
 
-export const getVehiclesByCampaign = (campaignName) =>
-  API.get(CDF_AUTO, `/fleet/campaign`, {
-    queryStringParameters: {
+export async function getVehiclesByCampaign (campaignName) {
+  const restOperation = get({
+    apiName: CDF_AUTO, 
+    endpoint: CDF_AUTO_ENDPOINT, 
+    path: `/fleet/campaign`, 
+    options: {
+      queryParams: {
       "name": campaignName
+      }
     },
-  });
+  })
+  return (await restOperation.response).body.json();
+};
 
-export const getTelemetryDetails = (vehicleName) =>
-  API.get(CDF_AUTO, `/telemetry`, {
-    queryStringParameters: {
+export async function getTelemetryDetails (vehicleName) {
+  const restOperation = get({
+    apiName: CDF_AUTO, 
+    endpoint: CDF_AUTO_ENDPOINT, 
+    path:`/telemetry`, 
+    options: {
+      queryParams: {
       "vehicle-name": vehicleName
-    },
-  });
+    }}
+  })
+  return (await restOperation.response).body.json();
+};
 
-export const downloadVehicleCert = (vehicleName) =>
-  API.get(CDF_AUTO, `/vehicle/download-cert`, {
-    queryStringParameters: {
-      "vehicle-name": vehicleName
-    },
-  });
+  export async function  downloadVehicleCert (vehicleName) {
+    const restOperation = get({
+      apiName: CDF_AUTO, 
+      endpoint: CDF_AUTO_ENDPOINT, 
+      path: `/vehicle/download-cert`, 
+      options: {
+        queryParams: {
+        "vehicle-name": vehicleName
+      }}
+    })
+    return (await restOperation.response).body.json();
+  };
+
+  export async function  linkDevice (vehicleName) {
+    const restOperation = get({
+      apiName: CDF_AUTO, 
+      endpoint: CDF_AUTO_ENDPOINT, 
+      path: `/vehicle/link-device`, 
+      options: {
+        queryParams: {
+        "vehicle-name": vehicleName
+      }}
+    })
+    return (await restOperation.response).body.json();
+  };

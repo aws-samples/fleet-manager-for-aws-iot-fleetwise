@@ -6,7 +6,8 @@ from aws_cdk import (
     aws_dynamodb as dynamodb,
     aws_timestream as ts,
     aws_iam as iam,
-    aws_lambda as _lambda
+    aws_lambda as _lambda,
+    aws_lambda_python_alpha as pylambda
 )
 from constructs import Construct
 
@@ -53,7 +54,7 @@ class ApiStack(BaseNestedStack):
             default_method_options=apigw.MethodOptions(authorizer=self.backend_api_authorizer),
         )
 
-        self.save_parameter(name="backend_api_url", value=self.backend_api.url, category="/api/")
+        self.save_parameter(name="backend_api_url", value=self.backend_api.url, category="/api/")       
 
         # Create timestream execution role
         self.ts_exec_role =  iam.Role(self, self.name_helper('timestream_exec_role'), 
@@ -85,11 +86,12 @@ class ApiStack(BaseNestedStack):
                 "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
                 "arn:aws:iam::aws:policy/AWSIoTFullAccess",
                 "arn:aws:iam::aws:policy/AmazonS3FullAccess",
-                "arn:aws:iam::aws:policy/AmazonTimestreamFullAccess"
+                "arn:aws:iam::aws:policy/AmazonTimestreamFullAccess",
+                "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
             ],
             memory_size=256,
             timeout=30,
-            layers=[self.common_layer],
+            layers=[self.common_layer,self.segno_lambda_layer],
             env={
                 "DECODER_MANIFEST_ARN": iot_stack.decoder_manifest.attr_arn,
                 "VEHICLE_MODEL_ARN":  iot_stack.model_manifest.attr_arn,
@@ -177,8 +179,10 @@ class ApiStack(BaseNestedStack):
                 "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
                 "arn:aws:iam::aws:policy/AmazonTimestreamReadOnlyAccess",
                 "arn:aws:iam::aws:policy/AWSIoTFullAccess",
+                "arn:aws:iam::aws:policy/AmazonS3FullAccess",
                 "arn:aws:iam::aws:policy/AWSLambda_FullAccess",
-                "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
+                "arn:aws:iam::aws:policy/AmazonECS_FullAccess",
+                "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
             ],
             memory_size=256,
             timeout=30,
@@ -197,7 +201,7 @@ class ApiStack(BaseNestedStack):
                 "CERTS_BUCKET":certs_bucket.bucket_name ,
                 "LOCATIONS_BUCKET":locations_bucket.bucket_name,
                 "ECS_CLUSTER_NAME":simulator_stack.cluster.cluster_name
-            },
+            }
         )
         
         ecs_invoke_lambda.grant_invoke(self.simulation_lambda)
@@ -222,7 +226,7 @@ class ApiStack(BaseNestedStack):
                 "TS_DATABASE": ts_database,
                 "TS_TABLE": ts_table.table_name,
                 "DDB_TABLE":ddb_metadata_table.table_name,
-            },
+            }
         )
 
         fleetwise_policy.attach_to_role(role=self.telemetry_retrieval_lambda_role)
@@ -344,8 +348,14 @@ class ApiStack(BaseNestedStack):
 
             self.add_lambda_to_api_path(
             ref,
-            "/fleet/list-vehicles",
+            "/vehicle/link-device",
             ["GET"]
+            )
+
+            self.add_lambda_to_api_path(
+                ref,
+                "/fleet/list-vehicles",
+                ["GET"]
             )
 
             self.add_lambda_to_api_path(

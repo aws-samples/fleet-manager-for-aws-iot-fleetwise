@@ -5,11 +5,8 @@ import Map, { NavigationControl, Layer, Source, useMap } from "react-map-gl/mapl
 import "maplibre-gl/dist/maplibre-gl.css";
 import {  setSelectedVehicleData } from "actions/dataActions";
 import { setSingleVehicleViewOpen } from "actions/viewActions";
-
-const region = "us-east-1";
-const mapName = "explore.map.Esri";
-const apiKey =
-  "v1.public.eyJqdGkiOiJiNGQ1OGRhNS1lZTJjLTRmYzYtODk2ZC00ODgwNGY2OTZjOTkifTFh98iUTphnrNHT-aL0ZxulU40U-wm9LzAKyAHnmTLi9GHqjaQHQvPKPYQkCsYC_1-CQXp5KqJkNft2GUbKJefpxh5d9zFcLH-caCUdG3MZuvHfrVyvtb4cxurZHOcfoffYf9sjQRA8i2hYo64aEcnqNtAgGLVJFKi_2PdRO9O5SvtlDjlYPkq9AWrYDjvF99EKcUzXDYM0H6oy5cr9QqgR4m7gORsZuvqOUCoL-_S22y5bK4HLqLIApipPIQqUa2sJhZJKx-Rs4OPtKVXYA5d4hFm1Zyfh0OXV_js5ZfQ2GpotOsmQeLMfpkaEpnUWUwVdg4i2ATjFBz86hJRNyZo.ZWU0ZWIzMTktMWRhNi00Mzg0LTllMzYtNzlmMDU3MjRmYTkx";
+import { LOCATION_MAP_NAME, REGION, IDENTITY_POOL_ID } from 'assets/appConfig';
+import { withIdentityPoolId } from '@aws/amazon-location-utilities-auth-helper';
 
 // Displays clusters and single pin from GeoJSON data.
 const ClustersFeature = ({ vehicles = [] }) => {
@@ -92,13 +89,21 @@ const FlyToFragment = ({vehicles}) => {
   return <></>;
 };
 
-function AmazonMaps({ vehicles, selectedVehicleData, setSelectedVehicle, openSingleVehicleView }) {
-
+ function AmazonMaps({ vehicles, selectedVehicleData, setSelectedVehicle, openSingleVehicleView }) {
+const [authHelper, setAuthHelper] = useState(null)
   const [viewport, setViewport] = useState({
     latitude: 37.8,
     longitude: -100.4,
     zoom: 3.8
   });
+  const getAuthHelper =async () => {
+    const authHelper = await withIdentityPoolId(REGION + ':' + IDENTITY_POOL_ID)
+    setAuthHelper(authHelper)
+
+  }
+  useEffect(()=>{
+   getAuthHelper()
+  },[])
 
   useEffect(()=>{
     if (vehicles?.length===0) return;
@@ -118,6 +123,7 @@ function AmazonMaps({ vehicles, selectedVehicleData, setSelectedVehicle, openSin
       zoom: 3.8
     });
   },[vehicles])
+
 
   const transformVehicles = vehicles.map(({ coordinates: [longitude, latitude], properties: { vin } }) => {
     return {
@@ -156,9 +162,11 @@ function AmazonMaps({ vehicles, selectedVehicleData, setSelectedVehicle, openSin
       openSingleVehicleView();
     }
   };
+
   return (
-    <>
-      <Map
+    <> {
+      authHelper?(
+        <Map
         initialViewState={{
           container: "map", // HTML element ID of map element
           longitude: (vehicles && vehicles.length!==0)?vehicles[0].coordinates[0]: -100.4,
@@ -169,7 +177,7 @@ function AmazonMaps({ vehicles, selectedVehicleData, setSelectedVehicle, openSin
         {...viewport}
         onMove={e => setViewport(e.viewState)}
         style={{ height: "100%", width: "100%" }}
-        mapStyle={`https://maps.geo.${region}.amazonaws.com/maps/v0/maps/${mapName}/style-descriptor?key=${apiKey}`}
+        mapStyle={`https://maps.geo.${REGION}.amazonaws.com/maps/v0/maps/${LOCATION_MAP_NAME}/style-descriptor`}{...authHelper.getMapAuthenticationOptions()}
         interactiveLayerIds={["points", "clusters", "cluster-count"]} // 'points' layer from clusters to have a pointer cursor when hovered
         onClick={handleClick}
       >
@@ -177,6 +185,9 @@ function AmazonMaps({ vehicles, selectedVehicleData, setSelectedVehicle, openSin
         <ClustersFeature vehicles={transformVehicleDataForCluster()} />
         {/* <FlyToFragment vehicles={vehicles} /> */}
       </Map>
+      ):null
+    }
+      
     </>
   );
 }

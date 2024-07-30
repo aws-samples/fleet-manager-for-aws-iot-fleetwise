@@ -10,31 +10,42 @@
  *  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions    *
  *  and limitations under the License.                                                                                *
  *********************************************************************************************************************/
-import { Auth } from "aws-amplify";
 import { REGION, USER_POOL_ID, USER_POOL_CLIENT_ID } from "assets/appConfig";
 import { CDF_AUTO_ENDPOINT } from "assets/appConfig";
 import { CDF_AUTO } from "apis/_NAMES";
+const apiGateWayName = CDF_AUTO;
 
 export default {
   Auth: {
-    mandatorySignIn: true,
-    region: REGION,
-    userPoolId: USER_POOL_ID,
-    userPoolWebClientId: USER_POOL_CLIENT_ID
+    Cognito: {
+      userPoolId: USER_POOL_ID,
+      userPoolClientId: USER_POOL_CLIENT_ID,
+      region: REGION,
+      loginWith: {
+        email: true,
+      },
+      signUpVerificationMethod: "code",
+      userAttributes: {
+        email: {
+          required: true,
+        },
+      },
+      allowGuestAccess: true,
+      passwordFormat: {
+        minLength: 8,
+        requireLowercase: true,
+        requireUppercase: true,
+        requireNumbers: true,
+        requireSpecialCharacters: true,
+      },
+    },
   },
   API: {
-    endpoints: [
-      {
-        name: CDF_AUTO,
+    REST: {
+      [apiGateWayName]: {
         endpoint: `${CDF_AUTO_ENDPOINT}`,
-        custom_header: async () => {
-          return {
-            Authorization: `${(await Auth.currentSession())
-              .getIdToken()
-              .getJwtToken()}`
-          };
-        }
+        region: 'us-east-1'
       }
-    ]
+    }
   }
 };

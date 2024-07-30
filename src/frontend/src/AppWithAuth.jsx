@@ -11,28 +11,28 @@
  *  and limitations under the License.                                                                                *
  *********************************************************************************************************************/
 import React, { Suspense, useState } from "react";
-import { Authenticator, SignIn, SignOut, Greetings } from "aws-amplify-react";
-import awsConfig from "awsConfig";
+import { Authenticator } from "@aws-amplify/ui-react";
+import { useTheme, View, Image, Text, Heading, useAuthenticator, Button } from '@aws-amplify/ui-react';
+//const App = React.lazy(() => import("App"));
+//const LandingPage = React.lazy(() => import("components/landing-page/LandingPage"));
+//import Input from "./StyledInput";
+//import Submit from "./SubmitButton";
 
 const App = React.lazy(() => import("App"));
 const LandingPage = React.lazy(() => import("components/landing-page/LandingPage"));
 
-const AppWithAuth = () => {
-  const [authState, setAuthState] = useState();
-  const stateChangeHandler = (state) => setAuthState(state);
-  const signedIn = authState === "signedIn";
+const AppWithAuth = ({ }) => {
+  const { authStatus } = useAuthenticator(context => [context.authStatus]);
 
-  return (
-    <Suspense fallback={<div />}>
-      <Authenticator
-        hide={[SignIn, SignOut, Greetings]}
-        amplifyConfig={awsConfig.Auth}
-        onStateChange={stateChangeHandler}
-      >
-        {signedIn ? <App /> : <LandingPage />}
-      </Authenticator>
+    return (
+      <Suspense fallback={<div />}>
+        {authStatus === 'authenticated' ? <App /> : <LandingPage />}
     </Suspense>
-  );
-};
+  );  
+ 
+}
 
 export default AppWithAuth;
+
+
+///{({ signOut }) => <button onClick={signOut}>Sign out</button>}

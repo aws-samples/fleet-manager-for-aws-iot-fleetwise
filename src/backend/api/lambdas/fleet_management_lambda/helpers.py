@@ -4,6 +4,7 @@ import boto3
 import logging
 import datetime
 import time
+import segno
 from inspect import signature
 from typing import Callable, Dict, Any
 from random import choices, randint
@@ -12,10 +13,14 @@ logging.getLogger().setLevel(logging.INFO)
 
 # define boto3 clients
 fleetwise_client = boto3.client("iotfleetwise")
-s3_client = boto3.client('s3')
 iot_client = boto3.client("iot")
 ts_client = boto3.client('timestream-query')
+ts_write_client = boto3.client('timestream-write')
 dynamodb_client = boto3.resource('dynamodb')
+s3_client = boto3.client('s3', region_name='us-east-1')
+endpointUrl = s3_client.meta.endpoint_url
+s3_client = boto3.client('s3', endpoint_url=endpointUrl, region_name=os.getenv("REGION"))
+s3r = boto3.resource('s3')
 
 # return datetime
 
@@ -309,6 +314,10 @@ def create_vehicle(data):
         # Add vehicle to fleet
         logging.info("associate vehicle")
         associate_vehicle(data['fleet-name'], data['vehicle-name'])
+        
+        # Add initial record to Timestream:
+        insert_vehicle_data(data)
+        
         return vehicle_response
     except Exception as e:
         logging.error(e)
@@ -464,6 +473,7 @@ def update_vehicle(data):
 
 def create_fleet(data):
     logging.info("Creating new fleet")
+    logging.info(data)
     try:
         response = fleetwise_client.create_fleet(
             fleetId=data['fleet-name'],
@@ -699,6 +709,43 @@ def get_vehicle_metadata(vehicle_name):
 
 # get vehicle data from timestream DB
 
+def _current_milli_time():
+    return str(int(round(time.time() * 1000)))
+    
+def insert_vehicle_data(data: dict):
+    current_time = _current_milli_time()
+
+    dimensions = [
+      {'Name': 'vehicleName', 'Value': data['vehicle-name']},
+      {'Name': 'model', 'Value': data['model']},
+      {'Name': 'make', 'Value': data['make']},
+      {'Name': 'vin', 'Value': data['vin']}
+    ]
+    
+    telemetry_latitude_record = {
+      'Dimensions': dimensions,
+      'MeasureName': 'Vehicle.CurrentLocation.Latitude',
+      'MeasureValue': '84.3877',
+      'MeasureValueType': 'DOUBLE',
+      'Time': current_time
+    }
+    
+    telemetry_longitude_record = {
+      'Dimensions': dimensions,
+      'MeasureName': 'Vehicle.CurrentLocation.Longitude',
+      'MeasureValue': '33.7488',
+      'MeasureValueType': 'DOUBLE',
+      'Time': current_time
+    }
+
+    records = [telemetry_latitude_record, telemetry_longitude_record]
+
+    try:
+        result = ts_write_client.write_records(DatabaseName=os.getenv("TS_DATABASE"), TableName=os.getenv("TS_TABLE"),
+                     Records=records, CommonAttributes={})
+        print("WriteRecords Status: [%s]" % result['ResponseMetadata']['HTTPStatusCode'])
+    except Exception as err:
+     print("Error:", err)
 
 def get_vehicle_data(vehicle_name: str):
     query_string = """
@@ -799,3 +846,60 @@ def get_trips(vehicle_name):
     except Exception as e:
         logging.error(e)
         return "error"
+
+
+def linkvehicle(vehicle_name):
+    VEHICLE_NAME = vehicle_name
+    BUCKET_KEY = VEHICLE_NAME + '/' + VEHICLE_NAME + '.json'
+    #raise Exception('Something went wrong')
+    TOPIC_PREFIX = '$aws/iotfleetwise/'
+    BUCKET_NAME = os.environ["CERTS_BUCKET"]
+    PREFIX = VEHICLE_NAME + '/'
+    content_object = s3_client.get_object(Bucket=BUCKET_NAME,Key=BUCKET_KEY)
+
+    file_content = content_object["Body"].read().decode('utf-8')
+    json_content = json.loads(file_content)
+    CERTIFICATEPEM = json_content["certificatePem"]
+    PRIVATE_KEY = json_content["privateKey"]
+    return createQRCode(BUCKET_KEY, VEHICLE_NAME, CERTIFICATEPEM, PRIVATE_KEY, BUCKET_NAME)
+    
+def createQRCode(BUCKET_KEY, VEHICLE_NAME, CERTIFICATE_PEM, PRIVATE_KEY, BUCKET_NAME):
+
+	url = s3_client.generate_presigned_url(
+	    ClientMethod='get_object',
+	    Params={
+	        'Bucket': BUCKET_NAME,
+	        'Key': BUCKET_KEY 
+	    },
+	    ExpiresIn=3600 # one hour in seconds, increase if needed
+	)
+	
+	QR_CODE_FILENAME= VEHICLE_NAME + '.png'
+	QR_CODE_FILENAME_LOCAL='/tmp/' + QR_CODE_FILENAME
+	QR_CODE_FILENAME_CLOUD = VEHICLE_NAME + "/" + QR_CODE_FILENAME
+	
+	#out = io.BytesIO()
+	qr = segno.make(url)
+	qr.save(QR_CODE_FILENAME_LOCAL, kind='png', scale=5)
+
+	s3r.Bucket(BUCKET_NAME).upload_file(QR_CODE_FILENAME_LOCAL, QR_CODE_FILENAME_CLOUD)
+
+	qrUrl = s3_client.generate_presigned_url(
+	    ClientMethod='get_object',
+	    Params={
+	        'Bucket': BUCKET_NAME,
+	        'Key': QR_CODE_FILENAME_CLOUD
+	    },
+	    ExpiresIn=3600 # one hour in seconds, increase if needed
+	)
+	
+	return {
+        'statusCode': 200,
+        'headers': {
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*"
+        },
+        'body': json.dumps(qrUrl)
+    }
+    

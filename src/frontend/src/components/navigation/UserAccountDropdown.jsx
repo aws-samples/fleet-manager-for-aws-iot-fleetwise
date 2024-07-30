@@ -11,7 +11,7 @@
  *  and limitations under the License.                                                                                *
  *********************************************************************************************************************/
 import React from "react";
-import { Auth } from "aws-amplify";
+import { signOut, getCurrentUser } from "aws-amplify/auth";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { useIsMounted } from "utils/reactHooks";
@@ -37,12 +37,12 @@ const UserAccountDropdown = ({ userLogOutCleanup, alertOpen }) => {
   const toggleDropdown = () => setOpen(open => !open);
   const handleMenuAwayClick = () => !alertOpen && setOpen(false);
   const handleSignOut = React.useCallback(
-    () => Auth.signOut().then(userLogOutCleanup),
+    () => signOut().then(userLogOutCleanup),
     [userLogOutCleanup]
   );
 
   React.useEffect(() => {
-    Auth.currentAuthenticatedUser()
+    getCurrentUser()
       .then(({ attributes = {}, username }) => {
         isMounted.current && setUsername(attributes.email || username);
       })

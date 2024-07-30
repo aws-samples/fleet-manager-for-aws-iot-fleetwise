@@ -103,7 +103,7 @@ const Dashboard = ({ updateFleetListData }) => {
   const getData = async () => {
     try {
      setError('')
-      const fleetList = await getAllFleets();
+      let fleetList = await getAllFleets()
       if(fleetList.body) {
         let error = fleetList.body
         error = error.toString()
@@ -112,9 +112,10 @@ const Dashboard = ({ updateFleetListData }) => {
         setLoading(false)
         return
       } 
-      let campaignList = await getAllCampaigns();
+      let campaignList  = (await (await (await getAllCampaigns()).response).body.text()).toString();
+
       if(campaignList.body) {
-        let error = campaignList.body
+        let error = campaignList.body;
         error = error.toString()
         error = error.replace(/["']/g, "");
         setError(error)
@@ -122,7 +123,7 @@ const Dashboard = ({ updateFleetListData }) => {
         return
       }
       setToastOpen(false)
-      campaignList = ["Select campaign",...campaignList]
+      campaignList = ["Select campaign", ...campaignList]
       let fleetIndex = selectedFleetIndex
       let campaignIndex = selectedCampaignIndex
       if (selectedFleet !== '' && selectedCampign !== '') {
@@ -138,7 +139,7 @@ const Dashboard = ({ updateFleetListData }) => {
       setSelectedCampaign(campaignList[campaignIndex])
       if(fleetList.fleetSummaries.length!==0) {
         getVehicles(fleetList.fleetSummaries[fleetIndex].id)
-      } else {
+      } else { 
         setLastUpdatedTime(getCurrentDate())
         setDataLoaded(true)
         setLoading(false)

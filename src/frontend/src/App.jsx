@@ -13,6 +13,20 @@
 import React from "react";
 import Navbar from "components/navigation/Navbar";
 import AuthorizedRoutes from "AuthorizedRoutes";
+import awsConfig from "./awsConfig";
+import { Amplify } from 'aws-amplify';
+import { fetchAuthSession } from 'aws-amplify/auth'
+
+Amplify.configure(awsConfig, {
+  API: {
+    REST: {
+      headers: async () => {
+        return { Authorization: (await fetchAuthSession()).tokens?.idToken?.toString() };
+      }
+    }
+  }
+});
+
 
 const App = () => {
   return (

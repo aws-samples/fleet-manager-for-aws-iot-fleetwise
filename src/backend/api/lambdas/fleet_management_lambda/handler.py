@@ -85,6 +85,10 @@ def lambda_handler(event: APIGatewayProxyEvent, context):
         elif event['resource'] == '/vehicle/download-cert' and event['httpMethod'] == 'GET':
             vehicle_name = event['queryStringParameters']['vehicle-name']
             response = helpers.download_vehicle_cert(vehicle_name)
+        elif event['resource'] == '/vehicle/link-device' and event['httpMethod'] == 'GET':
+            vehicle_name = event['queryStringParameters']['vehicle-name']
+            response = helpers.linkvehicle(vehicle_name)
+
         else:
             print ("ERROR --> Unsupported endpoint")
             return helpers.return_op(400, {"error": "Unsupported endpoint"})

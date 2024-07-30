@@ -19,19 +19,21 @@ import TabsBtns from "./TabsBtns";
 import General from "./General";
 import Battery from "./Battery";
 import amzVehicle from "assets/img/aws_daimler_photo.png";
+//import amzVehicle from "assets/img/amz_vehicle_new_riv.png";
 import { darkNavyText, lightGrayishBlue, mediumBlue, white, blueGraphite } from "assets/colors";
 
 import Status from "./Status";
 import NewTires from "./NewTires";
 import SingleVehicleSimulation from "../modals/single-vehicle-simulation/SingleVehicleSimulation";
+import LinkDeviceToVehicle from "../modals/link-device/LinkDeviceToVehicle";
 import { downloadVehicleCert } from "apis/vehicles";
+import { linkDevice } from "apis/vehicles";
 import { startorStopSimulation } from "apis/simulation";
 import Loading from "components/dashboard/tables/custom/Loader";
 import { useHistory } from "react-router-dom";
 import { setSelectedVehicleData } from "actions/dataActions";
 import { setSingleVehicleView } from "actions/viewActions";
 import { getTelemetryDetails } from "apis/vehicles";
-
 
 
 import MuiAlert from '@material-ui/lab/Alert';
@@ -44,8 +46,10 @@ const DeviceDetails = ({vehicleDetails }) => {
   const [selectedTab, setSelectedTab] = useState("details");
   const [loading, setLoading] = useState(false)
   const [singleVehicle, setSingleVehicle] = useState(false)
+  const [linkDeviceState, setLinkDevice] = useState(false)
   const certLink = React.useRef();
   const [cert, setCert] = React.useState();
+  const [qrcodeUrl, setqrcodeUrl] = useState("");
   const [isSuccessToast, setIsSuccessToast] = useState(true);
   const [toastMsg, setToastMsg] = useState("");
   const [toastOpen, setToastOpen] = useState(false);
@@ -95,7 +99,6 @@ const DeviceDetails = ({vehicleDetails }) => {
     }
   }
 
-
   useEffect(() => {
     let intervalId;
     if (vehicle.simulationStatus === 'HEALTHY' || vehicle.simulationStatus === 'RUNNING' || vehicle.simulationStatus === 'STARTING') {
@@ -110,12 +113,11 @@ const DeviceDetails = ({vehicleDetails }) => {
     };
   }, [vehicle.simulationStatus])
 
-
-
-
-
   const handleStartSimulation = () => {
     setSingleVehicle(true)
+  }
+  const handeLinkDeviceOpen = () => {
+    setLinkDevice(true)
   }
   const getError = () => "Couldn't stop simulation"
 
@@ -124,8 +126,11 @@ const DeviceDetails = ({vehicleDetails }) => {
     setToastMsg(msg);
     setToastOpen(true);
   };
+  const handeLinkDeviceClose = () => {
+    setLinkDevice(false);
+  }
   const handleSingleVehicleClose = () => {
-    setSingleVehicle(false);
+    setSingleVehicle(false)
   }
   const simulationStarted = (updatedVehicleDetails) => {
     clearPolling()
@@ -139,13 +144,23 @@ const DeviceDetails = ({vehicleDetails }) => {
     return (
       <Modal
         open={singleVehicle}
-        onclose={handleSingleVehicleClose}
+        onClose={handleSingleVehicleClose}
       >
         <SingleVehicleSimulation handleClose={handleSingleVehicleClose} vehicleName={vehicle.vehicleName} handleToast={handleToast} simulationStarted={simulationStarted} />
       </Modal>
     );
   }
 
+  const LinkDeviceToVehicleModal = () => {
+    return (
+      <Modal
+        open={linkDeviceState}
+        onClose={handeLinkDeviceClose}
+      >
+        <LinkDeviceToVehicle handleClose={handeLinkDeviceClose} vehicleName={vehicle.vehicleName} handleToast={handleToast} qrcodesrc={qrcodeUrl} />
+      </Modal>
+    );
+  }
 
   React.useEffect(() => {
     if (cert) {
@@ -174,6 +189,26 @@ const DeviceDetails = ({vehicleDetails }) => {
     }
   }
 
+  const onLinkDeviceClick = async () => {
+    try {
+      const response = await linkDevice(vehicle.vehicleName);
+      if(response.statusCode != 200) {
+        let error = response.body
+        error = error.toString()
+        error = error.replace(/["']/g, "");
+        handleToast(false, error)
+        return
+      }
+      setqrcodeUrl(response.body.replace(/["']/g, ""));
+      handeLinkDeviceOpen()
+    } catch (err) {
+      if(err.toString().includes('status code 500')) {
+        handleToast(false,err.toString())
+        } else {
+          handleToast(false, "Failed to retreive QR Code." + err.toString());
+        }
+    }
+  }
 
   const handleToastClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -245,6 +280,7 @@ const DeviceDetails = ({vehicleDetails }) => {
   return (
     <div>
       <SingleVehicleSimulationModal />
+      <LinkDeviceToVehicleModal />
       <Paper elevation={4} className={classes.container}>
         <Grid item lg={6} sm={12}>
           <div className={classes.vehicleImg}>
@@ -286,6 +322,9 @@ const DeviceDetails = ({vehicleDetails }) => {
             }
             <div onClick={onDownloadClick} className={classes.downloadCertificate}>
               Download Certificate
+            </div>
+            <div onClick={onLinkDeviceClick} className={classes.linkDevice}>
+              Link Device
             </div>
             <a className={classes.hiddenElement} download href={cert} ref={certLink} />
           </div>
@@ -358,6 +397,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: blueGraphite
   },
   downloadCertificate: {
+    padding: "0.5rem 1rem",
+    margin: "1rem",
+    color: darkNavyText,
+    borderRadius: "0.33rem",
+    "&:hover": {
+      cursor: "pointer"
+    },
+    backgroundColor: lightGrayishBlue
+  },
+  linkDevice: {
     padding: "0.5rem 1rem",
     margin: "1rem",
     color: darkNavyText,

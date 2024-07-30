@@ -1,24 +1,11 @@
-/*********************************************************************************************************************
- *  Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.                                           *
- *                                                                                                                    *
- *  Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance    *
- *  with the License. A copy of the License is located at                                                             *
- *                                                                                                                    *
- *      http://www.apache.org/licenses/LICENSE-2.0                                                                    *
- *                                                                                                                    *
- *  or in the 'license' file accompanying this file. This file is distributed on an 'AS IS' BASIS, WITHOUT WARRANTIES *
- *  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions    *
- *  and limitations under the License.                                                                                *
- *********************************************************************************************************************/
 window.appVariables = {
-  USER_POOL_ID: "",
-  USER_POOL_CLIENT_ID: "",
-  CDF_AUTO_ENDPOINT: "",
-  REGION: "us-east-1",
-  MAP_NAME: "",
-  CALCULATOR_NAME: "",
-  PLACE_INDEX_NAME: "",
-  MAP_STYLE_API_KEY:
-    "",
-  IDENTITY_POOL_ID: ""
+  REGION: 'us-east-1',
+  USER_POOL_ID: 'us-east-1_OwTZnbJY4',
+  USER_POOL_CLIENT_ID: '3urcrc4h5fg6usagvh7u5j6u1',
+  IDENTITY_POOL_ID: 'c65ee0d8-8309-48d9-8f54-6b6561133a26',
+  CDF_AUTO_ENDPOINT: 'https://1ayusenx76.execute-api.us-east-1.amazonaws.com/prod',
+  LOCATION_MAP_NAME: 'cvs_location_map_test',
+  ROUTE_MAP_NAME: 'cvs_route_map_test',
+  CALCULATOR_NAME: 'cvs_route_calculator_test',
+  PLACE_INDEX_NAME: 'cvs_place_index_test'
 };

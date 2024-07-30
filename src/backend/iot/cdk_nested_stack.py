@@ -91,10 +91,21 @@ class IoTStack(BaseNestedStack):
         with open(os.path.join(os.path.dirname(__file__), 'decoder-manifest-signals.json'), 'r', encoding='utf-8') as file:
             decoder_nodes = file.read().replace('\n', '').replace('\r', '').replace(' ', '')
 
+        with open(os.path.join(os.path.dirname(__file__), 'network-interfaces.json'), 'r', encoding='utf-8') as file:
+            network_interfaces = file.read().replace('\n', '').replace('\r', '').replace(' ', '')
+
+        #with open(os.path.join(os.path.dirname(__file__), 'gps-nodes.json'), 'r', encoding='utf-8') as file:
+        #    external_gps_nodes = file.read().replace('\n', '').replace('\r', '').replace(' ', '')
+
         nodes = []
         if (decoder_nodes != '{}'):
             signals = json.loads(decoder_nodes)
             nodes = [signal["fullyQualifiedName"] for signal in signals]
+
+        network_nodes = []
+        if (network_interfaces != '{}'):
+            networks = json.loads(network_interfaces)
+            network_nodes = [network["interfaceId"] for network in networks]
 
         attr_nodes = [
             {
@@ -143,14 +154,45 @@ class IoTStack(BaseNestedStack):
                 "decoder_manifest"),
             description="DECODER MANIFEST",
             network_interfaces=[
-                {
-                    'interfaceId': '1',
-                    'type': 'CAN_INTERFACE',
-                        'canInterface': {
-                            'name': 'vcan0'
-                        }
-                },
-            ],
+   {
+    "interfaceId": "1",
+    "type": "CAN_INTERFACE",
+    "canInterface": {
+       "name": "vcan0",
+       "protocolName": "CAN",
+       "protocolVersion": "2.0B"
+    }
+   },
+   {
+     "interfaceId": "0",
+     "type": "OBD_INTERFACE",
+     "obdInterface": {
+       "name": "can0",
+       "requestMessageId": "2015",
+       "obdStandard": "J1979",
+       "pidRequestIntervalSeconds": "5",
+       "dtcRequestIntervalSeconds": "5"
+     }
+   },
+   {
+     "interfaceId": "EXTERNAL-GPS-CAN",
+     "type": "CAN_INTERFACE",
+     "canInterface": {
+       "name": "can0",
+       "protocolName": "CAN",
+       "protocolVersion": "2.0B"
+     }
+   },
+   {
+     "interfaceId": "AAOS-VHAL-CAN",
+     "type": "CAN_INTERFACE",
+     "canInterface": {
+       "name": "can0",
+       "protocolName": "CAN",
+       "protocolVersion": "2.0B"
+     }
+   }
+ ],
             signal_decoders=[
                 i
                 for i in signals

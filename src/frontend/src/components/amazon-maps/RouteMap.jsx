@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import Map, { NavigationControl, Marker, Layer, Source } from "react-map-gl/maplibre";
-import Location from 'aws-sdk/clients/location';
-import { MAP_NAME, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, REGION, MAP_STYLE_API_KEY, CALCULATOR_NAME } from 'assets/appConfig';
+import { LocationClient } from "@aws-sdk/client-location";
+import { CognitoIdentity } from "@aws-sdk/client-cognito-identity";
+import { ROUTE_MAP_NAME, REGION, CALCULATOR_NAME, IDENTITY_POOL_ID } from 'assets/appConfig';
 import { mediumBlue } from "assets/colors";
 import WarningIcon from "assets/img/warning_icon.png";
 import VehicleIcon from "assets/img/vehicle_icon.svg";
 
 import { connect } from "react-redux";
 import { setSelectedVehicleData } from "actions/dataActions";
-
+import { withIdentityPoolId } from '@aws/amazon-location-utilities-auth-helper';
 
 const RouteMap = ({ selectedVehicleData }) => {
 
+  const [authHelper, setAuthHelper] = useState(null)
+
+  const getAuthHelper =async () => {
+    const authHelper = await withIdentityPoolId(REGION + ':' + IDENTITY_POOL_ID)
+    setAuthHelper(authHelper)
+  }
+
+  useEffect(()=>{
+   getAuthHelper()
+  },[])
 
   const fromCoordinates = selectedVehicleData?.fromCoordinates !== undefined ? selectedVehicleData?.fromCoordinates : {
     "Latitude": "33.946462",
@@ -42,7 +53,7 @@ const RouteMap = ({ selectedVehicleData }) => {
       zoom: 10
      })
    }
-  },[selectedVehicleData.fromCoordinates])
+  },[selectedVehicleData?.fromCoordinates])
 
   const [route, setRoute] = useState(null);
   function degreesToRadians(degrees) {
@@ -89,15 +100,16 @@ const RouteMap = ({ selectedVehicleData }) => {
 
 
   useEffect(() => {
+    
     const fetchRoute = async () => {
-      // Initialize AWS Location Service
-      const locationService = new Location({
-        credentials: {
-          accessKeyId: AWS_ACCESS_KEY_ID,
-          secretAccessKey: AWS_SECRET_ACCESS_KEY
-        },
-        region: REGION
-      });
+
+      const credentials = new CognitoIdentity({
+        IdentityPoolId: IDENTITY_POOL_ID 
+       });
+
+       const locationService = new LocationClient({
+         credentials
+     });
 
       const params = {
         CalculatorName: CALCULATOR_NAME,
@@ -122,8 +134,8 @@ const RouteMap = ({ selectedVehicleData }) => {
             }
           ]
         })
-        const newLat = selectedVehicleData.geoLocation.Latitude
-        const newLong = selectedVehicleData.geoLocation.Longitude
+        const newLat = selectedVehicleData?.geoLocation.Latitude
+        const newLong = selectedVehicleData?.geoLocation.Longitude
       //  const bearing = calculateBearing(vehiclePosition.Latitude, vehiclePosition.Longitude, newLat, newLong)
       if(newLat && newLong) {
         setVehiclePosition({
@@ -135,9 +147,11 @@ const RouteMap = ({ selectedVehicleData }) => {
       } catch (error) {
       }
     };
-    fetchRoute();
+    if(authHelper) {
+      fetchRoute();
+    }
 
-  }, [selectedVehicleData]);
+  }, [selectedVehicleData,authHelper]);
   const layerStyle = {
     id: 'route',
     type: 'line',
@@ -148,12 +162,14 @@ const RouteMap = ({ selectedVehicleData }) => {
   };
   return (
     <>
-      <Map
+    {
+      authHelper?(
+        <Map
         initialViewState={{
           container: "map"
         }}
         {...viewport}
-        mapStyle={`https://maps.geo.${REGION}.amazonaws.com/maps/v0/maps/${MAP_NAME}/style-descriptor?key=${MAP_STYLE_API_KEY}`}
+        mapStyle={`https://maps.geo.${REGION}.amazonaws.com/maps/v0/maps/${ROUTE_MAP_NAME}/style-descriptor`}{...authHelper.getMapAuthenticationOptions()}
         onMove={e => setViewport(e.viewState)}
         style={{ height: "100%", width: "100%" }}
       >
@@ -174,9 +190,10 @@ const RouteMap = ({ selectedVehicleData }) => {
             </Marker>
           </Source>
         )}
-
-
       </Map>
+      ):null
+    }
+      
     </>
   );
 };
