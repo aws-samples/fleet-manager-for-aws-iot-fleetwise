@@ -97,7 +97,7 @@ const [authHelper, setAuthHelper] = useState(null)
     zoom: 3.8
   });
   const getAuthHelper =async () => {
-    const authHelper = await withIdentityPoolId(REGION + ':' + IDENTITY_POOL_ID)
+    const authHelper = await withIdentityPoolId(IDENTITY_POOL_ID)
     setAuthHelper(authHelper)
 
   }

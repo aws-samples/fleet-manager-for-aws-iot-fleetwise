@@ -2,3 +2,8 @@
 config.yaml
 cdk.out
 /src/__pycache__
+package-lock.json
+src/backend/__pycache__
+src/__init__.py
+cdk.context.json
+.vscode

@@ -21,7 +21,7 @@ const SingleVehicleSimulation = ({ handleClose, vehicleName, handleToast, simula
 
     const initializeLocationService = async () => {
         
-        const authHelper = await withIdentityPoolId(REGION + ':' + IDENTITY_POOL_ID); // use Cognito pool id for credentials
+        const authHelper = await withIdentityPoolId(IDENTITY_POOL_ID); // use Cognito pool id for credentials
 
         const locationService = new LocationClient({
             region: REGION,

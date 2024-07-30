@@ -114,16 +114,13 @@ const Dashboard = ({ updateFleetListData }) => {
       } 
       let campaignListStr  = await (await (await getAllCampaigns()).response).body.json();
 
-      if(isEmpty(campaignListStr)) {
-        let error = campaignListStr.body;
-        error = error.toString()
-        error = error.replace(/["']/g, "");
-        setError(error)
-        setLoading(false)
-        return
-      }
+      let campaignList = ["Select campaign"]
+      if(!!!isEmpty(campaignListStr)) {
+        campaignList = ["Select campaign", ...campaignListStr]
+      } 
+      
       setToastOpen(false)
-      let campaignList = ["Select campaign", ...campaignListStr]
+      
       let fleetIndex = selectedFleetIndex
       let campaignIndex = selectedCampaignIndex
       if (selectedFleet !== '' && selectedCampign !== '') {

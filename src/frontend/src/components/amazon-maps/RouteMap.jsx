@@ -16,7 +16,7 @@ const RouteMap = ({ selectedVehicleData }) => {
   const [authHelper, setAuthHelper] = useState(null)
 
   const getAuthHelper =async () => {
-    const authHelper = await withIdentityPoolId(REGION + ':' + IDENTITY_POOL_ID)
+    const authHelper = await withIdentityPoolId(IDENTITY_POOL_ID)
     setAuthHelper(authHelper)
   }
 

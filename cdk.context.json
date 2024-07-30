@@ -18,5 +18,9 @@
     "us-east-1d",
     "us-east-1e",
     "us-east-1f"
-  ]
+  ],
+  "ssm:account=022035076260:parameterName=/cvs/cognito/dev1/user_pool_id:region=us-east-1": "us-east-1_wYpGEiLZX",
+  "ssm:account=022035076260:parameterName=/cvs/cognito/dev1/user_pool_client_id:region=us-east-1": "751oplk56ahu19e30i2pkmnoi4",
+  "ssm:account=022035076260:parameterName=/cvs/cognito/dev1/identity_pool_id:region=us-east-1": "us-east-1:5f0519b0-3f0e-4409-88a3-07ea816eae6a",
+  "ssm:account=022035076260:parameterName=/cvs/api/dev1/backend_api_url:region=us-east-1": "https://5ec756pudb.execute-api.us-east-1.amazonaws.com/prod/"
 }

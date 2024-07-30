@@ -1,6 +1,6 @@
 #use this template to create config.yaml file
 APP_PREFIX: "cvs"
-ENVIRONMENT_NAME: "dev"
+ENVIRONMENT_NAME: "dev1"
 ACCOUNT: "022035076260"
 REGION: "us-east-1"
 ECS_NODE_AMI: "ami-0bd2f238e75f8092a"
