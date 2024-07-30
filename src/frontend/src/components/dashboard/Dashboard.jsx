@@ -112,9 +112,9 @@ const Dashboard = ({ updateFleetListData }) => {
         setLoading(false)
         return
       } 
-      let campaignList  = (await (await (await getAllCampaigns()).response).body.text()).toString();
+      let campaignListStr  = await (await (await getAllCampaigns()).response).body.json();
 
-      if(campaignList.body) {
+      if(isEmpty(campaignListStr)) {
         let error = campaignList.body;
         error = error.toString()
         error = error.replace(/["']/g, "");
@@ -123,7 +123,7 @@ const Dashboard = ({ updateFleetListData }) => {
         return
       }
       setToastOpen(false)
-      campaignList = ["Select campaign", ...campaignList]
+      let campaignList = ["Select campaign", ...campaignListStr]
       let fleetIndex = selectedFleetIndex
       let campaignIndex = selectedCampaignIndex
       if (selectedFleet !== '' && selectedCampign !== '') {
@@ -443,6 +443,9 @@ const Dashboard = ({ updateFleetListData }) => {
     }
   }
 
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
   const handleSelectedVehicle = async (vehicle) => {
     setError('')
     setLoading(true)
