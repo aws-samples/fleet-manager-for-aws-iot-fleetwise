@@ -115,7 +115,7 @@ const Dashboard = ({ updateFleetListData }) => {
       let campaignListStr  = await (await (await getAllCampaigns()).response).body.json();
 
       if(isEmpty(campaignListStr)) {
-        let error = campaignList.body;
+        let error = campaignListStr.body;
         error = error.toString()
         error = error.replace(/["']/g, "");
         setError(error)

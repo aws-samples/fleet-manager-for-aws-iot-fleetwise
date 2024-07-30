@@ -34,6 +34,13 @@ class ApiStack(BaseNestedStack):
 
         self.common_layer = self._build_common_layer()
         
+        self.segno_lambda_layer = pylambda.PythonLayerVersion(
+               self, 'SegnoLambdaLayer',
+               entry='src/backend/api/lambdas/fleet_management_lambda/segno_layer',
+               compatible_runtimes=[_lambda.Runtime.PYTHON_3_12],
+               description='Segno Library',
+               layer_version_name='1'
+           )
         
         self.backend_api_authorizer = apigw.CognitoUserPoolsAuthorizer(
             self,

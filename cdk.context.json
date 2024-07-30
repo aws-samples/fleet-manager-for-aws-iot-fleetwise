@@ -10,5 +10,13 @@
   "ssm:account=195026230833:parameterName=/cvs/cognito/test/user_pool_id:region=us-east-1": "us-east-1_OwTZnbJY4",
   "ssm:account=195026230833:parameterName=/cvs/cognito/test/user_pool_client_id:region=us-east-1": "3urcrc4h5fg6usagvh7u5j6u1",
   "ssm:account=195026230833:parameterName=/cvs/cognito/test/identity_pool_id:region=us-east-1": "c65ee0d8-8309-48d9-8f54-6b6561133a26",
-  "ssm:account=195026230833:parameterName=/cvs/api/test/backend_api_url:region=us-east-1": "https://1ayusenx76.execute-api.us-east-1.amazonaws.com/prod/"
+  "ssm:account=195026230833:parameterName=/cvs/api/test/backend_api_url:region=us-east-1": "https://1ayusenx76.execute-api.us-east-1.amazonaws.com/prod/",
+  "availability-zones:account=022035076260:region=us-east-1": [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c",
+    "us-east-1d",
+    "us-east-1e",
+    "us-east-1f"
+  ]
 }

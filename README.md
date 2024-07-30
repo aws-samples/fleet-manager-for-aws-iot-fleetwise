@@ -51,20 +51,24 @@ Copy the config.template.yaml file to create a config.yaml file and modify accou
 ```
     cp config.template.yaml config.yaml
 ```
-
-5.	Bootstrap CDK Environment (only required for the first time):
+5. Docker needs to be running to build the Simulation docker container: (on Mac)
+```
+brew install docker docker-compose colima
+colima start
+```
+6.	Bootstrap CDK Environment (only required for the first time):
 Run the following command to bootstrap your environment:
 ```
     cdk bootstrap 
 ```
 
-6.	Synthesize CloudFormation Template:
+7.	Synthesize CloudFormation Template:
 Navigate to your CDK project directory and synthesize the CloudFormation template for the backend stack:
 ```
     cdk synth BackendStack
 ```
 
-7.	Deploy Backend Stack:
+8.	Deploy Backend Stack:
 Deploy the backend stack:
 ```
     cdk deploy BackendStack
