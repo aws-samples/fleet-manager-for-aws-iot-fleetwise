@@ -23,11 +23,14 @@ class SimulatorStack(BaseNestedStack):
         self.cluster = ecs.Cluster(self, self.name_helper(
             "ecs_cluster"), vpc=vpc, cluster_name=self.name_helper("ecs_cluster"))
 
+        linux_paramaters = ecs.LinuxParameters(self, "LinuxParameters")
+        linux_paramaters.add_capabilities(ecs.Capability.NET_ADMIN)
         # add an ECS capacity provider to your cluster
         self.cluster.add_capacity(
             self.name_helper("ecs_capacity"),
             instance_type=ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE3, ec2.InstanceSize.XLARGE),
             desired_capacity=1,
+            linux_parameters=linux_paramaters,
             machine_image=ec2.MachineImage.generic_linux({
                 'us-east-1': 'ami-0bd2f238e75f8092a'
             })

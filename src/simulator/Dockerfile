@@ -1,4 +1,5 @@
-FROM public.ecr.aws/lts/ubuntu:22.04
+FROM --platform=linux/amd64 public.ecr.aws/lts/ubuntu:22.04 
+
 
 RUN apt-get update && apt-get upgrade --fix-missing -y
 RUN apt-get install nano -y \

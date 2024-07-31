@@ -32,8 +32,8 @@ def setup_can_interface():
     try:
         print(f"Creating VCAN network with ID {unique_id}")
         can_sys_cmd = f"ip link add dev {unique_id} type vcan && ip link set up {unique_id}"
-        print(can_sys_cmd)
-        subprocess.check_output(can_sys_cmd, shell=True)
+        stdout = subprocess.run(can_sys_cmd, shell=True, text=True).stdout
+        print(stdout)
         print(f"{unique_id} created")
     except Exception as e:
         print(f"Error: {e}")
@@ -204,17 +204,17 @@ try:
     # Construct and run the asc2log command
     asc2log_command = f"asc2log -I {asc_file_path} -O {log_file_path}"
     print("Executing command:", asc2log_command)
-    subprocess.run(asc2log_command, shell=True, check=True)
+    os.system(asc2log_command)
     
     while True:  # Infinite loop for replaying the signals
         # Construct and run the canplayer command
         canplayer_command = f"canplayer -I {log_file_path} {unique_id}=can0"
         print("Executing command:", canplayer_command)
-        subprocess.run(canplayer_command, shell=True, check=True)
+        os.system(canplayer_command)
         time.sleep(20)
 except KeyboardInterrupt:
     print("CAN replay loop stopped by user.")
 except subprocess.CalledProcessError as e:
-    print(f"Command '{e.cmd}' returned non-zero exit status {e.returncode}")
+    print ("Error:\nreturn code: ", e.returncode, "\nError: ", e.stderr, "\nOutput: ", e.stdout)
 
 print("CAN replay completed.")
