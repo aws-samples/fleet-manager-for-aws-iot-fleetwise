@@ -170,22 +170,19 @@ class IoTStack(BaseNestedStack):
             status="ACTIVE"
         )
 
-
-        attributes = [signal["fullyQualifiedName"] for signal in attr_nodes]
-        nodes.extend(attributes)
         self.model_manifest_android = iotfleetwise.CfnModelManifest(
             self, self.name_helper("vehicle_model_android"),
             name=self.name_helper(
-                "vehicle_model"),
+                "vehicle_model_android"),
             signal_catalog_arn=self.signal_catalog.attr_arn,
-            description="VEHICLE MODEL",
+            description="VEHICLE MODEL ANDROID",
             nodes=nodes,
             status="ACTIVE"
         )
 
         self.decoder_manifest_android = iotfleetwise.CfnDecoderManifest(
             self, self.name_helper("decoder_manifest_android"),
-            model_manifest_android=self.model_manifest_android.attr_arn,
+            model_manifest_arn=self.model_manifest_android.attr_arn,
             name=self.name_helper(
                 "decoder_manifest_android"),
             description="DECODER MANIFEST ANDROID",
