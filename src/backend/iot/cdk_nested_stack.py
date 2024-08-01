@@ -154,45 +154,81 @@ class IoTStack(BaseNestedStack):
                 "decoder_manifest"),
             description="DECODER MANIFEST",
             network_interfaces=[
-   {
-    "interfaceId": "1",
-    "type": "CAN_INTERFACE",
-    "canInterface": {
-       "name": "vcan0",
-       "protocolName": "CAN",
-       "protocolVersion": "2.0B"
-    }
-   },
-   {
-     "interfaceId": "0",
-     "type": "OBD_INTERFACE",
-     "obdInterface": {
-       "name": "can0",
-       "requestMessageId": "2015",
-       "obdStandard": "J1979",
-       "pidRequestIntervalSeconds": "5",
-       "dtcRequestIntervalSeconds": "5"
-     }
-   },
-   {
-     "interfaceId": "EXTERNAL-GPS-CAN",
-     "type": "CAN_INTERFACE",
-     "canInterface": {
-       "name": "can0",
-       "protocolName": "CAN",
-       "protocolVersion": "2.0B"
-     }
-   },
-   {
-     "interfaceId": "AAOS-VHAL-CAN",
-     "type": "CAN_INTERFACE",
-     "canInterface": {
-       "name": "can0",
-       "protocolName": "CAN",
-       "protocolVersion": "2.0B"
-     }
-   }
- ],
+                {
+                    'interfaceId': '1',
+                    'type': 'CAN_INTERFACE',
+                        'canInterface': {
+                            'name': 'vcan0'
+                        }
+                },
+            ],
+            signal_decoders=[
+                i
+                for i in signals
+                if (i["type"] == "CAN_SIGNAL" or i["type"] == "OBD_SIGNAL")
+            ],
+            status="ACTIVE"
+        )
+
+
+        attributes = [signal["fullyQualifiedName"] for signal in attr_nodes]
+        nodes.extend(attributes)
+        self.model_manifest_android = iotfleetwise.CfnModelManifest(
+            self, self.name_helper("vehicle_model_android"),
+            name=self.name_helper(
+                "vehicle_model"),
+            signal_catalog_arn=self.signal_catalog.attr_arn,
+            description="VEHICLE MODEL",
+            nodes=nodes,
+            status="ACTIVE"
+        )
+
+        self.decoder_manifest_android = iotfleetwise.CfnDecoderManifest(
+            self, self.name_helper("decoder_manifest_android"),
+            model_manifest_android=self.model_manifest_android.attr_arn,
+            name=self.name_helper(
+                "decoder_manifest_android"),
+            description="DECODER MANIFEST ANDROID",
+            network_interfaces=[
+            {
+                "interfaceId": "1",
+                "type": "CAN_INTERFACE",
+                "canInterface": {
+                "name": "vcan0",
+                "protocolName": "CAN",
+                "protocolVersion": "2.0B"
+                }
+            },
+            {
+                "interfaceId": "0",
+                "type": "OBD_INTERFACE",
+                "obdInterface": {
+                "name": "can0",
+                "requestMessageId": "2015",
+                "obdStandard": "J1979",
+                "pidRequestIntervalSeconds": "5",
+                "dtcRequestIntervalSeconds": "5"
+                }
+            },
+            {
+                "interfaceId": "EXTERNAL-GPS-CAN",
+                "type": "CAN_INTERFACE",
+                "canInterface": {
+                "name": "can0",
+                "protocolName": "CAN",
+                "protocolVersion": "2.0B"
+                }
+            },
+            {
+                "interfaceId": "AAOS-VHAL-CAN",
+                "type": "CAN_INTERFACE",
+                "canInterface": {
+                "name": "can0",
+                "protocolName": "CAN",
+                "protocolVersion": "2.0B"
+                }
+            }
+            ],
             signal_decoders=[
                 i
                 for i in signals

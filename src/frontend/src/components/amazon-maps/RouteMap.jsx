@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Map, { NavigationControl, Marker, Layer, Source } from "react-map-gl/maplibre";
-import { LocationClient } from "@aws-sdk/client-location";
+import { LocationClient, CalculateRouteCommand } from "@aws-sdk/client-location";
 import { CognitoIdentity } from "@aws-sdk/client-cognito-identity";
 import { ROUTE_MAP_NAME, REGION, CALCULATOR_NAME, IDENTITY_POOL_ID } from 'assets/appConfig';
 import { mediumBlue } from "assets/colors";
 import WarningIcon from "assets/img/warning_icon.png";
 import VehicleIcon from "assets/img/vehicle_icon.svg";
 
+import Loading from "components/dashboard/tables/custom/Loader";
 import { connect } from "react-redux";
 import { setSelectedVehicleData } from "actions/dataActions";
 import { withIdentityPoolId } from '@aws/amazon-location-utilities-auth-helper';
@@ -14,7 +15,8 @@ import { withIdentityPoolId } from '@aws/amazon-location-utilities-auth-helper';
 const RouteMap = ({ selectedVehicleData }) => {
 
   const [authHelper, setAuthHelper] = useState(null)
-
+  const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const getAuthHelper =async () => {
     const authHelper = await withIdentityPoolId(IDENTITY_POOL_ID)
     setAuthHelper(authHelper)
@@ -102,13 +104,11 @@ const RouteMap = ({ selectedVehicleData }) => {
   useEffect(() => {
     
     const fetchRoute = async () => {
-
-      const credentials = new CognitoIdentity({
-        IdentityPoolId: IDENTITY_POOL_ID 
-       });
+      let errObj = {};
 
        const locationService = new LocationClient({
-         credentials
+         ...authHelper.getLocationClientConfig()
+         ,region: REGION
      });
 
       const params = {
@@ -119,7 +119,9 @@ const RouteMap = ({ selectedVehicleData }) => {
       };
 
       try {
-        const { Legs } = await locationService.calculateRoute(params).promise();
+        //const { Legs } = await locationService.calculateRoute(params).promise();
+        const command = new CalculateRouteCommand(params);
+        const { Legs } = await locationService.send(command);
         let { Geometry } = Legs[0];
         setRoute({
           "type": "FeatureCollection",
@@ -145,6 +147,16 @@ const RouteMap = ({ selectedVehicleData }) => {
         })
       } 
       } catch (error) {
+        errObj = { ...formErrors };
+        errObj = "Unable to display route.";
+      } finally {      
+          setFormErrors(errObj)
+          if (Object.keys(errObj).length > 0) {
+              setLoading(false)
+              return false
+          } else {
+              return true
+          }
       }
     };
     if(authHelper) {

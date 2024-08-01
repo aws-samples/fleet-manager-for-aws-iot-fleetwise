@@ -1,0 +1,1443 @@
+{
+    "name": "cvs_decoder_manifest_dev1",
+    "modelManifestArn": "arn:aws:iotfleetwise:us-east-1:022035076260:model-manifest/cvs_vehicle_model_dev1",
+    "description": "description",
+    "networkInterfaces": [
+        {
+            "canInterface": {
+                "name": "vcan",
+                "protocolName": "CAN",
+                "protocolVersion": "2.0b"
+            },
+            "interfaceId": "1",
+            "type": "CAN_INTERFACE"
+        }
+    ],
+    "signalDecoders": [
+        {
+            "canSignal": {
+                "factor": 0.2,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1025,
+                "name": "TirePressureFrontLeft",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.LeftFrontTirePressure",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1025,
+                "name": "TireTemperatureFrontLeft",
+                "offset": -50.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.LeftFrontTireTemperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.2,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1025,
+                "name": "TirePressureBackLeft",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.LeftRearTirePressure",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1025,
+                "name": "TireTemperatureBackLeft",
+                "offset": -50.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.LeftRearTireTemperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.2,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1025,
+                "name": "TirePressureFrontRight",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.RightFrontTirePressure",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1025,
+                "name": "TireTemperatureFrontRight",
+                "offset": -50.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.RightFrontTireTemperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.2,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1025,
+                "name": "TirePressureBackRight",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.RightRearTirePressure",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1025,
+                "name": "TireTemperatureBackRight",
+                "offset": -50.0,
+                "startBit": 56
+            },
+            "fullyQualifiedName": "Vehicle.Chassis.Axle.RightRearTireTemperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1e-06,
+                "isBigEndian": false,
+                "isSigned": false,
+                "length": 28,
+                "messageId": 3,
+                "name": "Latitude",
+                "offset": -90.0,
+                "startBit": 1
+            },
+            "fullyQualifiedName": "Vehicle.CurrentLocation.Latitude",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1e-06,
+                "isBigEndian": false,
+                "isSigned": false,
+                "length": 29,
+                "messageId": 3,
+                "name": "Longitude",
+                "offset": -180.0,
+                "startBit": 29
+            },
+            "fullyQualifiedName": "Vehicle.CurrentLocation.Longitude",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.5,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1024,
+                "name": "IndoorTemperature",
+                "offset": -40.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.InCabinTemperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.5,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1024,
+                "name": "OutdoorTemperature",
+                "offset": -40.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.OutsideAirTemperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.01,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 16,
+                "messageId": 257,
+                "name": "BatteryAvailableChargePower",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BatteryAvailableChargePower",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.01,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 16,
+                "messageId": 257,
+                "name": "BatteryAvailableDischargePower",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BatteryAvailableDischargePower",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.1,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 16,
+                "messageId": 771,
+                "name": "BatteryCurrent",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BatteryCurrent",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.1,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 16,
+                "messageId": 771,
+                "name": "BatteryDCVoltage",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BatteryDCVoltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 1,
+                "messageId": 770,
+                "name": "Charging",
+                "offset": 0.0,
+                "startBit": 55
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Charging.IsCharging",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 1,
+                "messageId": 769,
+                "name": "BatteryFanStatus",
+                "offset": 0.0,
+                "startBit": 47
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.FanRunning",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1280,
+                "name": "CellTemp01",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.1.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 512,
+                "name": "CellVoltage01",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.1.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1281,
+                "name": "CellTemp10",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.10.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 513,
+                "name": "CellVoltage10",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.10.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1281,
+                "name": "CellTemp11",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.11.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 513,
+                "name": "CellVoltage11",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.11.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1281,
+                "name": "CellTemp12",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.12.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 513,
+                "name": "CellVoltage12",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.12.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1281,
+                "name": "CellTemp13",
+                "offset": 0.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.13.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 513,
+                "name": "CellVoltage13",
+                "offset": 0.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.13.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1281,
+                "name": "CellTemp14",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.14.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 513,
+                "name": "CellVoltage14",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.14.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1281,
+                "name": "CellTemp15",
+                "offset": 0.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.15.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 513,
+                "name": "CellVoltage15",
+                "offset": 0.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.15.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1281,
+                "name": "CellTemp16",
+                "offset": 0.0,
+                "startBit": 56
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.16.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 513,
+                "name": "CellVoltage16",
+                "offset": 0.0,
+                "startBit": 56
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.16.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1282,
+                "name": "CellTemp17",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.17.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 514,
+                "name": "CellVoltage17",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.17.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1282,
+                "name": "CellTemp18",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.18.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 514,
+                "name": "CellVoltage18",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.18.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1282,
+                "name": "CellTemp19",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.19.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 514,
+                "name": "CellVoltage19",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.19.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1280,
+                "name": "CellTemp02",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.2.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 512,
+                "name": "CellVoltage02",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.2.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1282,
+                "name": "CellTemp20",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.20.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 514,
+                "name": "CellVoltage20",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.20.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1282,
+                "name": "CellTemp21",
+                "offset": 0.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.21.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 514,
+                "name": "CellVoltage21",
+                "offset": 0.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.21.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1282,
+                "name": "CellTemp22",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.22.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 514,
+                "name": "CellVoltage22",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.22.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1282,
+                "name": "CellTemp23",
+                "offset": 0.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.23.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 514,
+                "name": "CellVoltage23",
+                "offset": 0.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.23.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1282,
+                "name": "CellTemp24",
+                "offset": 0.0,
+                "startBit": 56
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.24.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 514,
+                "name": "CellVoltage24",
+                "offset": 0.0,
+                "startBit": 56
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.24.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1283,
+                "name": "CellTemp25",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.25.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 515,
+                "name": "CellVoltage25",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.25.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1283,
+                "name": "CellTemp26",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.26.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 515,
+                "name": "CellVoltage26",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.26.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1283,
+                "name": "CellTemp27",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.27.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 515,
+                "name": "CellVoltage27",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.27.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1283,
+                "name": "CellTemp28",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.28.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 515,
+                "name": "CellVoltage28",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.28.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1283,
+                "name": "CellTemp29",
+                "offset": 0.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.29.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 515,
+                "name": "CellVoltage29",
+                "offset": 0.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.29.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1280,
+                "name": "CellTemp03",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.3.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 512,
+                "name": "CellVoltage03",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.3.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1283,
+                "name": "CellTemp30",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.30.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 515,
+                "name": "CellVoltage30",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.30.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1283,
+                "name": "CellTemp31",
+                "offset": 0.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.31.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 515,
+                "name": "CellVoltage31",
+                "offset": 0.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.31.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1283,
+                "name": "CellTemp32",
+                "offset": 0.0,
+                "startBit": 56
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.32.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 515,
+                "name": "CellVoltage32",
+                "offset": 0.0,
+                "startBit": 56
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.32.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1280,
+                "name": "CellTemp04",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.4.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 512,
+                "name": "CellVoltage04",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.4.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1280,
+                "name": "CellTemp05",
+                "offset": 0.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.5.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 512,
+                "name": "CellVoltage05",
+                "offset": 0.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.5.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1280,
+                "name": "CellTemp06",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.6.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 512,
+                "name": "CellVoltage06",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.6.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1280,
+                "name": "CellTemp07",
+                "offset": 0.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.7.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 512,
+                "name": "CellVoltage07",
+                "offset": 0.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.7.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1280,
+                "name": "CellTemp08",
+                "offset": 0.0,
+                "startBit": 56
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.8.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 512,
+                "name": "CellVoltage08",
+                "offset": 0.0,
+                "startBit": 56
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.8.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 1281,
+                "name": "CellTemp09",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.9.Temperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 513,
+                "name": "CellVoltage09",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.9.Voltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 768,
+                "name": "MaxCellVoltage",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MaxCellVoltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 770,
+                "name": "MaxCellVoltageCellNo",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MaxCellVoltageCellNumber",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 769,
+                "name": "BatteryMaxTemperature",
+                "offset": 0.0,
+                "startBit": 8
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MaxTemperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.02,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 768,
+                "name": "MinCellVoltage",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MinCellVoltage",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 770,
+                "name": "MinCellVoltageCellNo",
+                "offset": 0.0,
+                "startBit": 32
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MinCellVoltageCellNumber",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": true,
+                "length": 8,
+                "messageId": 769,
+                "name": "BatteryMinTemperature",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.Module.MinTemperature",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.5,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 768,
+                "name": "StateOfChargeBMS",
+                "offset": 3.0,
+                "startBit": 48
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.StateOfCharge.Current",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.5,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 256,
+                "name": "StateOfChargeDisplay",
+                "offset": 3.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.StateOfCharge.Displayed",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.1,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 16,
+                "messageId": 257,
+                "name": "StateOfHealth",
+                "offset": 0.0,
+                "startBit": 40
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.StateOfHealth",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 1,
+                "messageId": 768,
+                "name": "hasActiveDTC",
+                "offset": 0.0,
+                "startBit": 63
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.hasActiveDTC",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 1.0,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 8,
+                "messageId": 1024,
+                "name": "VehicleSpeed",
+                "offset": 0.0,
+                "startBit": 16
+            },
+            "fullyQualifiedName": "Vehicle.Speed",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.000277778,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 32,
+                "messageId": 770,
+                "name": "OperatingTime",
+                "offset": 0.0,
+                "startBit": 24
+            },
+            "fullyQualifiedName": "Vehicle.TotalOperatingTime",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        },
+        {
+            "canSignal": {
+                "factor": 0.01,
+                "isBigEndian": true,
+                "isSigned": false,
+                "length": 64,
+                "messageId": 772,
+                "name": "BMSFirmwareVersion",
+                "offset": 0.0,
+                "startBit": 0
+            },
+            "fullyQualifiedName": "Vehicle.Powertrain.Battery.BMSFirmwareVersion",
+            "interfaceId": "1",
+            "type": "CAN_SIGNAL"
+        }
+    ]
+}

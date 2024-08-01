@@ -31,10 +31,14 @@ def generate_random_coordinates_for_california():
 def setup_can_interface():
     try:
         print(f"Creating VCAN network with ID {unique_id}")
-        can_sys_cmd = f"ip link add dev {unique_id} type vcan && ip link set up {unique_id}"
+        can_sys_cmd = f"sudo ip link add dev {unique_id} type vcan"
+        print(f"{unique_id} created")
         stdout = subprocess.run(can_sys_cmd, shell=True, text=True).stdout
         print(stdout)
-        print(f"{unique_id} created")
+        can_sys_cmd2 = f"sudo ip link set up {unique_id}"
+        stdout2 = subprocess.run(can_sys_cmd2, shell=True, text=True).stdout
+        print(stdout2)
+        print(f"{unique_id} brought up")
     except Exception as e:
         print(f"Error: {e}")
         #print(f"Error while creating can interface {unique_id}")
@@ -214,7 +218,5 @@ try:
         time.sleep(20)
 except KeyboardInterrupt:
     print("CAN replay loop stopped by user.")
-except subprocess.CalledProcessError as e:
-    print ("Error:\nreturn code: ", e.returncode, "\nError: ", e.stderr, "\nOutput: ", e.stdout)
 
 print("CAN replay completed.")

@@ -725,7 +725,7 @@ def insert_vehicle_data(data: dict):
     telemetry_latitude_record = {
       'Dimensions': dimensions,
       'MeasureName': 'Vehicle.CurrentLocation.Latitude',
-      'MeasureValue': '84.3877',
+      'MeasureValue': '33.7488',
       'MeasureValueType': 'DOUBLE',
       'Time': current_time
     }
@@ -733,7 +733,7 @@ def insert_vehicle_data(data: dict):
     telemetry_longitude_record = {
       'Dimensions': dimensions,
       'MeasureName': 'Vehicle.CurrentLocation.Longitude',
-      'MeasureValue': '33.7488',
+      'MeasureValue': '84.3877',
       'MeasureValueType': 'DOUBLE',
       'Time': current_time
     }

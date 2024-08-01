@@ -121,32 +121,34 @@
     },
     {
         "canSignal": {
-          "messageId": "1",
-          "isBigEndian": "true",
-          "isSigned": "true",
-          "startBit": "0",
-          "offset": "-2000.0",
-          "factor": "0.001",
-          "length": "32"
-        },
-        "fullyQualifiedName": "Vehicle.CurrentLocation.Longitude",
-        "type": "CAN_SIGNAL",
-        "interfaceId": "EXTERNAL-GPS-CAN"
-      },
-      {
-        "canSignal": {
-          "messageId": "1",
-          "isBigEndian": "true",
-          "isSigned": "true",
-          "startBit": "32",
-          "offset": "-2000.0",
-          "factor": "0.001",
-          "length": "32"
+            "factor": "1e-06",
+            "isBigEndian": "false",
+            "isSigned": "false",
+            "length": "28",
+            "messageId": "3",
+            "name": "Latitude",
+            "offset": "-90.0",
+            "startBit": "1"
         },
         "fullyQualifiedName": "Vehicle.CurrentLocation.Latitude",
-        "type": "CAN_SIGNAL",
-        "interfaceId": "EXTERNAL-GPS-CAN"
-      },
+        "interfaceId": "1",
+        "type": "CAN_SIGNAL"
+    },
+    {
+        "canSignal": {
+            "factor": "1e-06",
+            "isBigEndian": "false",
+            "isSigned": "false",
+            "length": "29",
+            "messageId": "3",
+            "name": "Longitude",
+            "offset": "-180.0",
+            "startBit": "29"
+        },
+        "fullyQualifiedName": "Vehicle.CurrentLocation.Longitude",
+        "interfaceId": "1",
+        "type": "CAN_SIGNAL"
+    },
     {
         "canSignal": {
             "factor": "0.5",
