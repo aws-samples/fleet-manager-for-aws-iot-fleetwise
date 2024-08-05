@@ -91,21 +91,18 @@ class IoTStack(BaseNestedStack):
         with open(os.path.join(os.path.dirname(__file__), 'decoder-manifest-signals.json'), 'r', encoding='utf-8') as file:
             decoder_nodes = file.read().replace('\n', '').replace('\r', '').replace(' ', '')
 
-        with open(os.path.join(os.path.dirname(__file__), 'network-interfaces.json'), 'r', encoding='utf-8') as file:
-            network_interfaces = file.read().replace('\n', '').replace('\r', '').replace(' ', '')
-
-        #with open(os.path.join(os.path.dirname(__file__), 'gps-nodes.json'), 'r', encoding='utf-8') as file:
-        #    external_gps_nodes = file.read().replace('\n', '').replace('\r', '').replace(' ', '')
+        with open(os.path.join(os.path.dirname(__file__), 'gps-nodes.json'), 'r', encoding='utf-8') as file:
+            external_gps_nodes = file.read().replace('\n', '').replace('\r', '').replace(' ', '')
 
         nodes = []
         if (decoder_nodes != '{}'):
             signals = json.loads(decoder_nodes)
             nodes = [signal["fullyQualifiedName"] for signal in signals]
 
-        network_nodes = []
-        if (network_interfaces != '{}'):
-            networks = json.loads(network_interfaces)
-            network_nodes = [network["interfaceId"] for network in networks]
+        android_nodes = []
+        if (external_gps_nodes != '{}'):
+            signals_android = json.loads(external_gps_nodes)
+            android_nodes = [signal["fullyQualifiedName"] for signal in signals_android]
 
         attr_nodes = [
             {
@@ -169,14 +166,15 @@ class IoTStack(BaseNestedStack):
             ],
             status="ACTIVE"
         )
-
+        
+        android_nodes.extend(attributes)
         self.model_manifest_android = iotfleetwise.CfnModelManifest(
             self, self.name_helper("vehicle_model_android"),
             name=self.name_helper(
                 "vehicle_model_android"),
             signal_catalog_arn=self.signal_catalog.attr_arn,
             description="VEHICLE MODEL ANDROID",
-            nodes=nodes,
+            nodes=android_nodes,
             status="ACTIVE"
         )
 
@@ -228,7 +226,7 @@ class IoTStack(BaseNestedStack):
             ],
             signal_decoders=[
                 i
-                for i in signals
+                for i in signals_android
                 if (i["type"] == "CAN_SIGNAL" or i["type"] == "OBD_SIGNAL")
             ],
             status="ACTIVE"

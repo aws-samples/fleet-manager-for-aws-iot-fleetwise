@@ -4,13 +4,13 @@
       "type": "CAN_SIGNAL",
       "interfaceId": "EXTERNAL-GPS-CAN",
       "canSignal": {
-        "messageId": 1,
-        "isBigEndian": true,
-        "isSigned": true,
-        "startBit": 0,
-        "offset": -2000.0,
-        "factor": 0.001,
-        "length": 32
+        "messageId": "1",
+        "isBigEndian": "true",
+        "isSigned": "true",
+        "startBit": "0",
+        "offset": "-2000.0",
+        "factor": "0.001",
+        "length": "32"
       }
     },
     {
@@ -18,13 +18,13 @@
       "type": "CAN_SIGNAL",
       "interfaceId": "EXTERNAL-GPS-CAN",
       "canSignal": {
-        "messageId": 1,
-        "isBigEndian": true,
-        "isSigned": true,
-        "startBit": 32,
-        "offset": -2000.0,
-        "factor": 0.001,
-        "length": 32
+        "messageId": "1",
+        "isBigEndian": "true",
+        "isSigned": "true",
+        "startBit": "32",
+        "offset": "-2000.0",
+        "factor": "0.001",
+        "length": "32"
       }
     }
   ]

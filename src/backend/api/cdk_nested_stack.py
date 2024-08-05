@@ -102,6 +102,8 @@ class ApiStack(BaseNestedStack):
             env={
                 "DECODER_MANIFEST_ARN": iot_stack.decoder_manifest.attr_arn,
                 "VEHICLE_MODEL_ARN":  iot_stack.model_manifest.attr_arn,
+                "DECODER_MANIFEST_ANDROID_ARN": iot_stack.decoder_manifest_android.attr_arn,
+                "VEHICLE_MODEL_ANDROID_ARN":  iot_stack.model_manifest_android.attr_arn,
                 "SIGNAL_CATALOG_ARN": iot_stack.signal_catalog.attr_arn,
                 "PREFIX" : config["APP_PREFIX"],
                 "ACCOUNT" : config["ACCOUNT"],

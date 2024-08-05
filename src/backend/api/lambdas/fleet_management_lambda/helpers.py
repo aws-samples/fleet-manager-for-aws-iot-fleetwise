@@ -45,7 +45,58 @@ def return_op(status, output) -> Dict[str, int | str]:
         'body': json.dumps(output, default=datetime_handler)
     }
 
-
+def create_android_campaign(name, arn):
+    campaign_name = f'{os.getenv("PREFIX")}_{name}_campaign_{os.getenv("ENVIRONMENT")}'
+    logging.info("Creating Android Campaign")
+    campaign = fleetwise_client.create_campaign(
+            name=campaign_name,
+            description=campaign_name,
+            signalCatalogArn=os.getenv("SIGNAL_CATALOG_ARN"),
+            targetArn=arn,
+            diagnosticsMode='SEND_ACTIVE_DTCS',
+            spoolingMode='TO_DISK',
+            compression='SNAPPY',
+            signalsToCollect=[
+                {
+                    'name': 'Vehicle.CurrentLocation.Latitude'
+                },
+                {
+                    'name': 'Vehicle.CurrentLocation.Longitude'
+                }
+            ],
+            collectionScheme={
+                'timeBasedCollectionScheme': {
+                    'periodMs': 30000
+                }
+            },
+            dataDestinationConfigs=[
+                {
+                    'timestreamConfig': {
+                        'timestreamTableArn': os.environ["TS_TABLE_ARN"],
+                        'executionRoleArn':  os.environ['TS_EXEC_ROLE']
+                    }
+                },
+            ]
+    )
+    retry_count = 10
+    delay = 2
+    while retry_count > 1:
+        logging.info(f"waiting for campaign {campaign_name} to be created")
+        time.sleep(5)      # wait to get campaign data
+        response = fleetwise_client.get_campaign(name=campaign_name)
+        logging.info(f"get_campaign response {response}")
+        if response['status'] == "WAITING_FOR_APPROVAL":
+            break
+        # time.sleep(delay)
+        retry_count -= 1
+    logging.info(f"approving the campaign {campaign_name}")
+    response = fleetwise_client.update_campaign(
+        name=campaign_name,
+        action='APPROVE'
+    )
+    logging.info(f"update_campaign response {response}")
+    return True
+    
 def create_campaign(name, arn):
     campaign_name = f'{os.getenv("PREFIX")}_{name}_campaign_{os.getenv("ENVIRONMENT")}'
     logging.info("Creating Campaign")
@@ -248,10 +299,19 @@ def create_vehicle(data):
                     return return_op(403, "{} license plate already exists".format(data["license"]))
             """
 
+        modelmanifestArn = ''
+        decodermanifestArn = ''
+        if data['fleet-name'] != 'Android':
+            modelmanifestArn=os.getenv("VEHICLE_MODEL_ARN")
+            decodermanifestArn=os.getenv("DECODER_MANIFEST_ARN")
+        else:
+            modelmanifestArn=os.getenv("VEHICLE_MODEL_ANDROID_ARN")
+            decodermanifestArn=os.getenv("DECODER_MANIFEST_ANDROID_ARN")
+
         vehicle_response = fleetwise_client.create_vehicle(
             vehicleName=data['vehicle-name'],
-            modelManifestArn=os.getenv("VEHICLE_MODEL_ARN"),
-            decoderManifestArn=os.getenv("DECODER_MANIFEST_ARN"),
+            modelManifestArn=modelmanifestArn,
+            decoderManifestArn=decodermanifestArn,
             attributes={
                 "vin": data['vin'],
                 "make": data['make'],
@@ -281,6 +341,7 @@ def create_vehicle(data):
         response = iot_client.create_keys_and_certificate(setAsActive=True)
         # logging.info(f"Create_keys_and_certificate response {response}")
         ret["Data"] = {
+            "vehicleName": data["vehicle-name"],
             "certificateId": response["certificateId"],
             "certificateArn": response["certificateArn"],
             "certificatePem": response["certificatePem"],
@@ -477,11 +538,14 @@ def create_fleet(data):
     try:
         response = fleetwise_client.create_fleet(
             fleetId=data['fleet-name'],
-            description='CMS Fleet',
+            description='FleetWise FM Fleet',
             signalCatalogArn=os.getenv("SIGNAL_CATALOG_ARN")
         )
-
-        create_campaign(response["id"], response["arn"])
+        
+        if data['fleet-name'] != 'Android':
+            create_campaign(response["id"], response["arn"])
+        else:
+            create_android_campaign(response["id"], response["arn"])
 
         return response
     except Exception as e:

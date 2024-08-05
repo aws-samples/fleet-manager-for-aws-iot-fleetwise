@@ -72,11 +72,11 @@ const AddNewVehicle = ({ fleets, handleToast, handleClose }) => {
 
     const payload = {
       "fleet-name": fleet,
-      vin: vin,
-      make: make,
-      model: model,
-      year: year,
-      license: licensePlate,
+      vin: vin.trim(),
+      make: make.trim(),
+      model: model.trim(),
+      year: year.trim(),
+      license: licensePlate.trim(),
     };
 
     try {
