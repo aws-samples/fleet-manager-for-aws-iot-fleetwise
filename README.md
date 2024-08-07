@@ -7,6 +7,52 @@ This project can be easily deployed into your account using the instructions bel
 
 The simulator uses the public ECR docker image of the [Fleet Wise Edge Agent](https://github.com/aws/aws-iot-fleetwise-edge) to communicate with another Docker image which is producting the simulation onto the vehicle's virtual network.
 
+# AWS IoT FleetWise Fleet Manager Features
+
+Below are a few screen captures from the Fleet Manager. These can be extended to fit customer use cases. Not all features are fully built out, but are placeholders for customers and/or partners to build out to fit their specific needs.
+
+![feature1](/docs/fwfm-login.png)
+
+AWS IoT FleetWise Fleet Manager uses Cognito User Pools to authenticate users. 
+
+![feature2](/docs/fwfm-dashboard.png)
+
+AWS IoT FleetWise Fleet Manager has a dashboard that customers can utilize to view vehicle attributes, or FleetWise campaign results.
+
+![feature3](/docs/fwfm-map.png)
+
+AWS IoT FleetWise Fleet Manager use Amazon Location services to view the last location of the vehicle on the map
+
+![feature4](/docs/fwfm-route.png)
+
+AWS IoT FleetWise Fleet Manager uses ECS + Amazon Location Services to simulate the vehicle going from Point A to Point B.
+
+![feature4](/docs/fwfm-vehicledetail.png)
+
+The Vehicle Detail screen shows the latest telemetry from the vehicle.
+
+# AWS IoT FleetWise Fleet Manager Companion Application
+
+In addition to the FleetWise Fleet Manager platform, we have built a companion application which will help pull telemetry off the vehicle via an OBD II port. For now, the Android application allows customers to connect an application running FleetWise agent on an Android phone and tracks the GPS location of the vehicle in the Fleet Manager portal. To use the FleetWise Fleet Manager companion application, clone the [IoT FleetWise Companion application](https://gitlab.aws.dev/givenand/iot-fleetwise-companion-app) and build the project in [Android Studio](https://developer.android.com/studio/install) for your specific Android device (TODO:// provide an APK to download directly).
+
+From there, within AWS IoT FleetWise Fleet Manager portal, add a Fleet called ```Android```. This will create an Android specific decoder manifest which will allow the GPS signals to be pushed to the FleetWise edge agent over JNI. From there, every 30 seconds the FleetWise campaign will capture Latitutde + Longitude and send them to the cloud once the ```Begin Data Aquisition``` button is clicked. (TODO:// need to develop the ```Trips``` concept to begin and end a trip)
+
+Using the ```Link Device``` feature in the FleetWise Fleet Manager, you can generate a QR Code which will allow you to link your Android application to your proper FleetWise Fleet Manager instance.
+
+![featurelink](/docs/fwfm-linkdevice.png)
+
+From here, we can pull up the FleetWise Fleet Manager Companion Application on our Android device:
+
+![featurelink](/docs/fwfm-android.png)
+
+And select Scan QR Code:
+
+![featurelink](/docs/fwfm-android2.png)
+
+Then your device should connect to AWS IoT FleetWise:
+
+![featurelink](/docs/fwfm-android3.png)
+
 # FleetWise Fleet Manager Architecture
 
 AWS IoT FleetWise is an AWS service that enables automakers and fleet operators to collect, store, organize, and monitor data from vehicles. Automakers need the ability to connect remotely to their fleet of vehicles and collect vehicle ECU/sensor data. AWS IoT FleetWise can be used by OEM engineers and data scientists to build vehicle models that can be used to build custom data collection schemes. These data collection schemes enables the OEM to optimize the data collection process by defining what signals to collect, how often to collect them, and most importantly the trigger conditions ("events") that enable the collection process.
