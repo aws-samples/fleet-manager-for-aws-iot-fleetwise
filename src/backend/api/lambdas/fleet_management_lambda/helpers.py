@@ -339,7 +339,6 @@ def create_vehicle(data):
         logging.info("Creating certificate for iot thing")
         ret = {"PhysicalResourceId": data["vehicle-name"]}
         response = iot_client.create_keys_and_certificate(setAsActive=True)
-        # logging.info(f"Create_keys_and_certificate response {response}")
         ret["Data"] = {
             "vehicleName": data["vehicle-name"],
             "certificateId": response["certificateId"],
