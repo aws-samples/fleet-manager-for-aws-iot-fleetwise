@@ -47,11 +47,11 @@ From here, we can pull up the FleetWise Fleet Manager Companion Application on o
 
 And select Scan QR Code:
 
-![featurelink](/docs/fwfm-android2.png)
+![featurelink](/docs/fwfm-android3.png)
 
 Then your device should connect to AWS IoT FleetWise:
 
-![featurelink](/docs/fwfm-android3.png)
+![featurelink](/docs/fwfm-android4.png)
 
 # FleetWise Fleet Manager Architecture
 
