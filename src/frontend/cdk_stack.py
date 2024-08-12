@@ -44,7 +44,7 @@ class FrontendStack(BaseStack):
             self,
             self.name_helper("RouteCalculator"),
             calculator_name=self.name_helper("route_calculator"),
-            data_source="Esri" 
+            data_source="Here" 
         )
 
         # Create place index
@@ -52,7 +52,7 @@ class FrontendStack(BaseStack):
             self,
             self.name_helper("PlaceIndex"),
             index_name=self.name_helper("place_index"),
-            data_source="Esri",  
+            data_source="Here",  
             data_source_configuration=location.CfnPlaceIndex.DataSourceConfigurationProperty(
                 intended_use="SingleUse"  
             )

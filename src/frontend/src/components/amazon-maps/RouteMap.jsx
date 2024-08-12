@@ -26,7 +26,7 @@ const RouteMap = ({ selectedVehicleData }) => {
    getAuthHelper()
   },[])
 
-  const fromCoordinates = selectedVehicleData?.fromCoordinates !== undefined ? selectedVehicleData?.fromCoordinates : {
+  let fromCoordinates = selectedVehicleData?.fromCoordinates !== undefined ? selectedVehicleData?.fromCoordinates : {
     "Latitude": "33.946462",
     "Longitude": "-118.384497"
   }
@@ -34,13 +34,18 @@ const RouteMap = ({ selectedVehicleData }) => {
     "Latitude": "34.041878000853",
     "Longitude": "-118.257006983392"
   }
+
+  if(selectedVehicleData?.geoLocation !== undefined) {
+    fromCoordinates = {
+      "Latitude":selectedVehicleData?.geoLocation.Latitude,
+      "Longitude":selectedVehicleData?.geoLocation.Longitude
+    }
+  }
   const [vehiclePosition, setVehiclePosition] = useState({
     "Latitude":fromCoordinates.Latitude,
     "Longitude":fromCoordinates.Longitude,
     "bearing":0
   })
-
-
   const [viewport, setViewport] = useState({
     latitude: fromCoordinates.Latitude,
     longitude: fromCoordinates.Longitude,
