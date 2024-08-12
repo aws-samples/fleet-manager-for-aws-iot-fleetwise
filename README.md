@@ -33,25 +33,7 @@ The Vehicle Detail screen shows the latest telemetry from the vehicle.
 
 # AWS IoT FleetWise Fleet Manager Companion Application
 
-In addition to the FleetWise Fleet Manager platform, we have built a companion application which will help pull telemetry off the vehicle via an OBD II port. For now, the Android application allows customers to connect an application running FleetWise agent on an Android phone and tracks the GPS location of the vehicle in the Fleet Manager portal. To use the FleetWise Fleet Manager companion application, clone the [IoT FleetWise Companion application](https://gitlab.aws.dev/givenand/iot-fleetwise-companion-app) and build the project in [Android Studio](https://developer.android.com/studio/install) for your specific Android device (TODO:// provide an APK to download directly).
-
-From there, within AWS IoT FleetWise Fleet Manager portal, add a Fleet called ```Android```. This will create an Android specific decoder manifest which will allow the GPS signals to be pushed to the FleetWise edge agent over JNI. From there, every 30 seconds the FleetWise campaign will capture Latitutde + Longitude and send them to the cloud once the ```Begin Data Aquisition``` button is clicked. (TODO:// need to develop the ```Trips``` concept to begin and end a trip)
-
-Using the ```Link Device``` feature in the FleetWise Fleet Manager, you can generate a QR Code which will allow you to link your Android application to your proper FleetWise Fleet Manager instance.
-
-![featurelink](/docs/fwfm-linkdevice.png)
-
-From here, we can pull up the FleetWise Fleet Manager Companion Application on our Android device:
-
-![featurelink](/docs/fwfm-android.png)
-
-And select Scan QR Code:
-
-![featurelink](/docs/fwfm-android3.png)
-
-Then your device should connect to AWS IoT FleetWise:
-
-![featurelink](/docs/fwfm-android4.png)
+In addition to the FleetWise Fleet Manager platform, we have built a companion application which will help pull telemetry off the vehicle via an OBD II port. For now, the Android application allows customers to connect an application running FleetWise agent on an Android phone and tracks the GPS location of the vehicle in the Fleet Manager portal. To use the FleetWise Fleet Manager companion application, clone the [IoT FleetWise Companion application](https://github.com/aws-samples/fleet-manager-for-aws-iot-fleetwise/src/companion) and build the project in [Android Studio](https://developer.android.com/studio/install) for your specific Android device.
 
 # FleetWise Fleet Manager Architecture
 
