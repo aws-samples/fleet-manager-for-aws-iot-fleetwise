@@ -1,7 +1,7 @@
 
 # AWS IoT FleetWise Fleet Manager 
 
-The AWS IoT FleetWise Fleet Manager provides a front-end user experience to the [AWS IoT FleetWise service](https://aws.amazon.com/iot-fleetwise/), creating the ability for customers and partners to develop fleet management platforms using AWS IoT Fleetwise. This reference implementation provides a front-end application using [Amazon Location Services](https://aws.amazon.com/pm/location/) as a mapping component, a vehicle simulator using (Amazon Elastic Container Service (Amazon ECS))[https://aws.amazon.com/ecs/] and uses [AWS IoT FleetWise service](https://aws.amazon.com/iot-fleetwise/) to model vehicles, transform vehicle data into human-readable values, and control what vehicle data to collect and when to transfer selected data to the cloud.
+The AWS IoT FleetWise Fleet Manager provides a front-end user experience to the [AWS IoT FleetWise service](https://aws.amazon.com/iot-fleetwise/), creating the ability for customers and partners to develop fleet management platforms using AWS IoT Fleetwise. This reference implementation provides a front-end application using [Amazon Location Services](https://aws.amazon.com/pm/location/) as a mapping component, a vehicle simulator using Amazon Elastic Container Service ([Amazon ECS](https://aws.amazon.com/ecs/)) and uses [AWS IoT FleetWise service](https://aws.amazon.com/iot-fleetwise/) to model vehicles, transform vehicle data into human-readable values, and control what vehicle data to collect and when to transfer selected data to the cloud.
 
 This project can be easily deployed into your account using the instructions below and will provide the capaibilty to simulate vehicle data from a standard vehicle model that will get setup when deployed through CDK. To add external devices (such as a dongle or a phone), this can be done as well and you are not limited to just using the simulator as is. There is a capability to download the IoT certificates to run locally on the device to authenticate to device to IoT Core.
 
@@ -33,7 +33,7 @@ The Vehicle Detail screen shows the latest telemetry from the vehicle.
 
 # AWS IoT FleetWise Fleet Manager Companion Application
 
-In addition to the FleetWise Fleet Manager platform, we have built a companion application which will help pull telemetry off the vehicle via an OBD II port. For now, the Android application allows customers to connect an application running FleetWise agent on an Android phone and tracks the GPS location of the vehicle in the Fleet Manager portal. To use the FleetWise Fleet Manager companion application, clone the [IoT FleetWise Companion application](https://github.com/aws-samples/fleet-manager-for-aws-iot-fleetwise/src/companion) and build the project in [Android Studio](https://developer.android.com/studio/install) for your specific Android device.
+In addition to the FleetWise Fleet Manager platform, we have built a companion application which will help pull telemetry off the vehicle via an OBD II port. For now, the Android application allows customers to connect an application running FleetWise agent on an Android phone and tracks the GPS location of the vehicle in the Fleet Manager portal. To use the FleetWise Fleet Manager companion application, clone the [IoT FleetWise Companion application](https://github.com/aws-samples/fleet-manager-for-aws-iot-fleetwise/tree/main/src/companion) and build the project in [Android Studio](https://developer.android.com/studio/install) for your specific Android device.
 
 # FleetWise Fleet Manager Architecture
 
