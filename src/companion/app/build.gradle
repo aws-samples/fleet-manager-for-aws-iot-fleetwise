@@ -1,0 +1,78 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+
+        // Add this line into `repositories` in `buildscript`
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.1'
+                // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.aws.iotfleetwise'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.aws.iotfleetwise"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+    compileOptions {
+        // Support for Java 8 features
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+        release {
+            minifyEnabled true
+        }
+    }
+    buildFeatures {
+        compose true
+        viewBinding true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
+    }
+
+    useLibrary 'android.car'
+}
+
+dependencies {
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment:2.7.6'
+    implementation 'androidx.navigation:navigation-ui:2.7.6'
+    implementation 'androidx.preference:preference:1.2.0'
+    // Support for Java 8 features
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
+    //qr code
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+    implementation 'com.google.zxing:core:3.3.3'
+
+    //worker
+    def work_version = "2.9.0"
+    implementation("androidx.work:work-runtime:$work_version")
+    implementation "androidx.concurrent:concurrent-futures:1.1.0"
+
+}
+configurations.implementation {
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+}

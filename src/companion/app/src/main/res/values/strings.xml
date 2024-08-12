@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">FleetWise Companion App</string>
+    <string name="configure_vehicle">Configure vehicle</string>
+    <string name="provisioning_help">Use your QR code scanner app to scan a provisioning QR code.</string>
+    <string name="provisioning_link">Provisioning link</string>
+    <string name="bluetooth_device_list">Bluetooth device list</string>
+    <string name="vehicle_configuration">Vehicle configuration</string>
+    <string name="update_time">Update time [seconds]</string>
+    <string name="status">Status</string>
+    <string name="bluetooth_device">Bluetooth device</string>
+    <string name="default_update_time">5</string>
+    <string name="about">About</string>
+    <string name="open_source_licenses">Open source licenses:</string>
+    <string name="github_link">Learn more about AWS IoT FleetWise at:\n<a href="https://github.com/aws/aws-iot-fleetwise-edge">https://github.com/aws/aws-iot-fleetwise-edge</a></string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="endpoint_address">endpointAddress</string>
+    <string name="vehicleName">vehicleName</string>
+    <string name="certificate">certificate</string>
+    <string name="privateKey">privateKey</string>
+    <string name="mqttTopicPrefix">mqttTopicPrefix</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">AWS IoT Fleet Manager</string>
+    <string name="title_logs">Logs</string>
+    <string name="title_preferences">Preferences</string>
+    <string name="configureButton">Configure</string>
+    <string name="sharedPrefs">fwePreferences</string>
+    <string name="connectTitle">Connect to AWS IoT FleetWise Fleet Manager</string>
+    <string name="tConfigure">Your application has not been connected to AWS IoT FleetWise FleetManager. Use the AWS IoT FleetWise FleetManager solution to provision your vehicle and generate a provisioning code to sync your phone to the AWS IoT FleetWise FleetManager.</string>
+    <string name="locationTitle">Allow AWS IoT FleetWise Fleet Manager to use your location</string>
+    <string name="tLocation">AWS IoT FleetWise Fleet Manager uses your location to perform basic Fleet Management operations. AWS IoT FleetWise Fleet Manager will use your location to identify your trips in the Fleet Management application.</string>
+    <string name="allowLocation">Enable Location Tracking</string>
+    <string name="cloud_setup">Cloud Setup</string>
+    <string name="certId" />
+    <string name="certificateId" />
+    <string name="certificatePem" />
+    <string name="certificateArn" />
+    <string name="campaignTitle">AWS IoT FleetWise Campaigns</string>
+    <string name="tCampaign">The following campaign ARN(s) have been assigned to this vehicle:</string>
+    <string name="connected_icon">Connected Icon</string>
+</resources>

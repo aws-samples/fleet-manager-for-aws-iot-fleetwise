@@ -1,0 +1,5 @@
+/home/ubuntu/aws-iot-fleetwise-edge/build/arm64-v8a/CMakeFiles/fwe-proto.dir
+/home/ubuntu/aws-iot-fleetwise-edge/build/arm64-v8a/CMakeFiles/fwe.dir
+/home/ubuntu/aws-iot-fleetwise-edge/build/arm64-v8a/CMakeFiles/aws-iot-fleetwise-edge.dir
+/home/ubuntu/aws-iot-fleetwise-edge/build/arm64-v8a/CMakeFiles/edit_cache.dir
+/home/ubuntu/aws-iot-fleetwise-edge/build/arm64-v8a/CMakeFiles/rebuild_cache.dir

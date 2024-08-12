@@ -1,0 +1,6 @@
+# Hashes of file build rules.
+e8d0f5dcf9364b839d7587fb97d3becb checkin.pb.h
+276ceebf0727672d5788f9a052399a11 collection_schemes.pb.h
+0c27bb94090086909283dad9d38cbea2 common_types.pb.h
+5df1d981b1e71b40c5a4919fcd8a840d decoder_manifest.pb.h
+7e94744b8dad6d2756dadcb5ec9f7883 vehicle_data.pb.h
