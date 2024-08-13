@@ -7,3 +7,4 @@ PyYAML
 boto3==1.34.9
 cdk-aws-iotfleetwise==0.3.2
 aws-cdk.aws-apigatewayv2-integrations-alpha
+aws-cdk.aws-lambda-python-alpha==2.149.0
