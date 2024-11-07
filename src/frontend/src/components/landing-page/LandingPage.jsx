@@ -96,8 +96,8 @@ const LandingPage = ({  }) => {
     <div className={classes.root}>
         <div className={classes.content}>
           <img src={Logo} alt="AWS" className="Logo" />
-          <div className="appName">Fleet Manager</div>
-          <div className="intro">for AWS IoT FleetWise</div>
+          <div className="appName">Connected Mobility Solution</div>
+          <div className="intro">for AWS</div>
       <Authenticator>
       {({ signOut }) => <button onClick={signOut}>Sign out</button>}
       </Authenticator>
