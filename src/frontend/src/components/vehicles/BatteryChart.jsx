@@ -8,7 +8,7 @@ const data = [
   { name: 'now', uv: 40, pv: 20, amt: 15 },
 ];
 
-const BatteryChart = () => {
+const BatteryChart = () => { 
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart data={data}>

@@ -28,7 +28,7 @@ const Navbar = ({ children }) => {
         <div style={{ display: "flex" }}>
           <div className={classes.appNameBox}>
             <img src={awsLogo} alt="AWS" className={classes.appLogo} />
-            Fleet Manager
+            Connected Mobility Solution
           </div>
           <div>
             <NavLink

@@ -155,8 +155,11 @@ const [authHelper, setAuthHelper] = useState(null)
     // Checking for click events on unclustered points
     if (feature?.layer?.id === "points") {
       const vehicleObj = {
-        coordinates: [feature.geometry.coordinates[0], feature.geometry.coordinates[1]],
-        properties: feature.properties,
+        geoLocation: {
+          Longitude : feature.geometry.coordinates[0],
+          Latitude: feature.geometry.coordinates[1]
+        },
+        device: feature.properties,
       };
       setSelectedVehicle(vehicleObj);
       openSingleVehicleView();

@@ -37,7 +37,11 @@ import { getVehiclesByFleetName, getVehiclesByCampaign, getTelemetryDetails } fr
 
 
 import MuiAlert from '@material-ui/lab/Alert';
-
+import DriverScore from "./charts/DriverScore";
+import FleetStatus from "./charts/FleetStatus";
+import Utilization from "./charts/Utilization";
+import MilesDriven from "./charts/MilesDriven";
+import BatterySOH from "./charts/BatterySOH";
 
 const Dashboard = ({ updateFleetListData }) => {
 
@@ -601,12 +605,12 @@ const Dashboard = ({ updateFleetListData }) => {
   const StartSimulationNNewFleet = () => {
     return (
       <div className={classes.startSimulationNFleetBtn}>
-        <StartSimulationOnAll />
+       
         <ActionNewFleetButton />
       </div>
     );
   }
-
+/*
   const StartSimulationOnAll = () => {
     return (
       <div
@@ -620,7 +624,7 @@ const Dashboard = ({ updateFleetListData }) => {
       </div>
     );
   };
-
+*/
   const ActionNewFleetButton = () => {
     return (
       <div
@@ -703,16 +707,28 @@ const Dashboard = ({ updateFleetListData }) => {
                 title={isCampaignSelected ? null : <div className={classes.subHeader}><SelectFleet fleets={fleets} selectedFleet={selectedFleet} handleSetSelectedFleet={handleSetSelectedFleet} /></div>}
                 lastUpdated={lastUpdatedTime}
                 vehiclesCount={isCampaignSelected ? totalCampaignVehicleCount : totalFleetVehicleCount}
-                actionButtonComponent={<><SelectCampaign campaigns={campaigns} selectedCampign={selectedCampign} handleSetSelectedCampaign={handleSetSelectedCampaign} switchToFleetView={switchToFleetView} /> <ActionButtons /> <AddNewVehicleModal /> </>}
+                actionButtonComponent={<><ActionButtons /> <AddNewVehicleModal /> </>}
               />
             ) : null}
+            <div style={{ background: "#66000000", display: 'flex', justifyContent: 'left', alignItems: 'left', height: 'auto' }}>
+            <DriverScore />
+              <FleetStatus />
+              <Utilization />
+              </div>
+              <div style={{ background: "#66000000", display: 'flex', justifyContent: 'left', alignItems: 'left', height: 'auto' }}>
+              <MilesDriven />
+              <BatterySOH />
+              </div>
             {selectedVin === null ? (
+              [              
               <TablesContainer  data={isCampaignSelected ? vehiclesCampaignWise : vehicles} fleetName={selectedFleet} campaignName={selectedCampign} handleSelectedVehicle={handleSelectedVehicle} totalVehicleCount={isCampaignSelected ? totalCampaignVehicleCount : totalFleetVehicleCount} handleToast={handleToast} isCampaignSelected={isCampaignSelected} startPollingForVehicleSimulation={startPollingForVehicleSimulation}
                 paginationState={paginationState}
                 handleChangePaginationState={handleChangePaginationState} />
+              ]
             ) : (
               null
             )}
+        
           </div>
           <ShowToastMessage />
         </div>
