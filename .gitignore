@@ -7,3 +7,4 @@ src/backend/__pycache__
 src/__init__.py
 cdk.context.json
 .vscode
+__pycache__/
